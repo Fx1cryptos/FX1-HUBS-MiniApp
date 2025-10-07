@@ -88,7 +88,7 @@ This contains 3D visuals, NFT previews, and promo media for FX1 HUBS branding.
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/fx1-hubs-miniapp.git
+git clone (https://github.com/Fx1cryptos/FX1-HUBS-MiniApp.git)
 
 # Navigate into the project
 cd fx1-hubs-miniapp
