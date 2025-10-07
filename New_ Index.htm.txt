@@ -1,0 +1,105 @@
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [nfts, setNfts] = useState([]);
+
+  // Replace with your wallet/contract address
+  const walletAddress = "0x17af2b27d43fa612aab0698214ef2c44b08845ee";
+
+  useEffect(() => {
+    async function fetchNFTs() {
+      try {
+        // Fetch from OpenSea
+        const openseaRes = await fetch(
+          `https://api.opensea.io/api/v2/chain/base/account/${walletAddress}/nfts`,
+          {
+            headers: {
+              "Accept": "application/json",
+              "X-API-KEY": process.env.NEXT_PUBLIC_OPENSEA_KEY || "" // optional API key
+            }
+          }
+        );
+        const openseaData = await openseaRes.json();
+
+        // Fetch from Zora
+        const zoraRes = await fetch(
+          `https://api.zora.co/v1/accounts/${walletAddress}/tokens`
+        );
+        const zoraData = await zoraRes.json();
+
+        // Merge NFTs
+        const allNFTs = [
+          ...(openseaData.nfts || []),
+          ...(zoraData.tokens || [])
+        ];
+        setNfts(allNFTs);
+      } catch (err) {
+        console.error("Error fetching NFTs:", err);
+      }
+    }
+    fetchNFTs();
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>FX1 Digital Hubs</title>
+        <meta
+          name="description"
+          content="Styling the Blockchain Metaverse with NFT Fashion & Digital Wardrobe"
+        />
+      </Head>
+
+      {/* Header */}
+      <header className={styles.header}>
+        <h1 className={styles.title}>⚡ FX1 DIGITAL HUBS</h1>
+        <p className={styles.subtitle}>Styling the Blockchain Metaverse</p>
+      </header>
+
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h2>Onchain Fashion • Digital Wardrobe • NFT Art</h2>
+          <p>
+            Explore surreal fashion NFTs and join the momentum of creators
+            shaping Web3 culture. One man team, one global vision.
+          </p>
+          <a href="/gallery" className={styles.ctaButton}>
+            Explore Gallery
+          </a>
+        </div>
+      </section>
+
+      {/* Dynamic NFT Gallery */}
+      <section className={styles.galleryPreview}>
+        <h3>Latest Onchain NFT Fashion</h3>
+        <div className={styles.grid}>
+          {nfts.length > 0 ? (
+            nfts.map((nft, index) => (
+              <div key={index} className={styles.card}>
+                <img
+                  src={
+                    nft.image_url ||
+                    nft.media?.[0]?.gateway ||
+                    "/images/placeholder.png"
+                  }
+                  alt={nft.name || "NFT Fashion"}
+                />
+                <h4>{nft.name || "Untitled Fashion NFT"}</h4>
+              </div>
+            ))
+          ) : (
+            <p className={styles.loading}>Loading NFT fashion drops...</p>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className={styles.footer}>
+        <p>© 2025 FX1 Digital Hubs • Styling the Blockchain Metaverse</p>
+      </footer>
+    </div>
+  );
+}
