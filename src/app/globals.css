@@ -272,11 +272,6 @@
     @apply min-h-[3.5rem] rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/80;
   }
 
-  .ai-response::before {
-    content: 'FX1 FLUX AI:';
-    @apply mr-2 font-semibold uppercase tracking-[0.3em] text-sky-200;
-  }
-
   .hero-actions {
     @apply mt-6 flex flex-wrap items-center justify-center gap-4;
   }
