@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.37",
+    "@openzeppelin/contracts": "^5.0.2",
     "autoprefixer": "^10.4.15",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.4.3",
