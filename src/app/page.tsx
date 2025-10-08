@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
 import SocialLinks from '@/components/SocialLinks'
 
 export default function Home() {
@@ -85,17 +85,17 @@ export default function Home() {
           <div className="stars layer layer-1" />
           <div className="layer layer-2" />
 
-          <div className="card floating layer depth-3" style={{ '--d': 0.1 } as React.CSSProperties}>
+          <div className="card floating layer depth-3" style={{ '--d': 0.1 } as CSSProperties}>
             <h3 className="card-title">ONCHAIN FASHION</h3>
             <p className="card-copy">Wearable NFTs &amp; runway drops</p>
           </div>
 
-          <div className="card floating layer depth-6" style={{ '--d': -0.06 } as React.CSSProperties}>
+          <div className="card floating layer depth-6" style={{ '--d': -0.06 } as CSSProperties}>
             <h3 className="card-title">AI COLLABS</h3>
             <p className="card-copy">FX1 FLUX — create with AI</p>
           </div>
 
-          <div className="card floating layer depth-4" style={{ '--d': 0.02 } as React.CSSProperties}>
+          <div className="card floating layer depth-4" style={{ '--d': 0.02 } as CSSProperties}>
             <h3 className="card-title">MARKETPLACE</h3>
             <p className="card-copy">Mint, list &amp; trade</p>
           </div>
