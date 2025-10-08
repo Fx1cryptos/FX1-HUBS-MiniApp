@@ -135,6 +135,12 @@
     filter: brightness(1.1);
   }
 
+  .btn-primary:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.85);
+    opacity: 0.7;
+  }
+
   .btn-outline {
     @apply rounded-full border border-white/40 px-6 py-3 text-sm uppercase tracking-[0.4em] text-white transition;
     background-color: rgba(255, 255, 255, 0.05);
@@ -220,6 +226,11 @@
 
   .btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .btn-secondary:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
   }
 
   .feed-grid {
