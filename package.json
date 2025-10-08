@@ -1,0 +1,25 @@
+{
+  "name": "fx1-digital-hubs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Onchain Fashion, AI & Web3 Innovation Hub",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.37",
+    "@openzeppelin/contracts": "^5.0.2",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.3.3"
+  }
+}
