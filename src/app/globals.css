@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
 
-body {
-  font-family: theme('fontFamily.sans');
+  body {
+    @apply font-sans;
+  }
 }
