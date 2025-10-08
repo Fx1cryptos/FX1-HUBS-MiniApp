@@ -179,6 +179,112 @@
     @apply text-xs font-semibold text-white;
   }
 
+  .content-section {
+    @apply relative w-full border-t border-white/5;
+    background: linear-gradient(180deg, rgba(15, 15, 35, 0.25), transparent 45%);
+  }
+
+  .section-shell {
+    @apply mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-16;
+  }
+
+  .section-header {
+    @apply flex flex-col gap-3;
+  }
+
+  .section-heading {
+    @apply text-2xl font-semibold uppercase tracking-[0.35em];
+  }
+
+  .section-subhead {
+    @apply max-w-2xl text-sm uppercase tracking-[0.2em] text-white/60;
+  }
+
+  .streak-card {
+    @apply flex flex-col gap-6 rounded-3xl border border-white/10 bg-black/70 p-8 backdrop-blur-lg md:flex-row md:items-center md:justify-between;
+    box-shadow: 0 25px 60px -30px rgba(59, 130, 246, 0.55);
+  }
+
+  .streak-label {
+    @apply text-xs uppercase tracking-[0.3em] text-white/60;
+  }
+
+  .streak-value {
+    @apply text-3xl font-semibold uppercase tracking-[0.35em];
+  }
+
+  .btn-secondary {
+    @apply rounded-full border border-white/30 px-6 py-3 text-sm uppercase tracking-[0.35em] text-white transition;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .feed-grid {
+    @apply grid gap-6 md:grid-cols-2;
+  }
+
+  .feed-card {
+    @apply rounded-3xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur;
+  }
+
+  .feed-author {
+    @apply text-xs font-semibold uppercase tracking-[0.3em] text-sky-200;
+  }
+
+  .feed-message {
+    @apply mt-3 text-sm text-white/80;
+  }
+
+  .market-grid {
+    @apply grid gap-8 md:grid-cols-2;
+  }
+
+  .market-card {
+    @apply flex flex-col gap-5 rounded-3xl border border-white/10 bg-black/70 p-6 backdrop-blur;
+  }
+
+  .market-visual {
+    @apply h-36 rounded-2xl;
+    background: radial-gradient(circle at 25% 20%, rgba(59, 130, 246, 0.8), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.7), transparent 65%);
+  }
+
+  .market-title {
+    @apply text-lg font-semibold uppercase tracking-[0.35em];
+  }
+
+  .market-copy {
+    @apply text-sm text-white/70;
+  }
+
+  .ai-panel {
+    @apply flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/70 p-6 backdrop-blur;
+  }
+
+  .ai-textarea {
+    @apply h-36 w-full rounded-2xl border border-white/15 bg-black/60 px-4 py-4 text-sm text-white placeholder:text-white/30 focus:border-sky-300 focus:outline-none;
+  }
+
+  .ai-response {
+    @apply min-h-[3.5rem] rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/80;
+  }
+
+  .ai-response::before {
+    content: 'FX1 FLUX AI:';
+    @apply mr-2 font-semibold uppercase tracking-[0.3em] text-sky-200;
+  }
+
+  .hero-actions {
+    @apply mt-6 flex flex-wrap items-center justify-center gap-4;
+  }
+
+  .hero-streak {
+    @apply mt-8 text-sm text-white/60;
+  }
+
   .page-footer {
     @apply border-t border-white/10 px-6 py-6 text-center text-sm text-white/60;
   }
