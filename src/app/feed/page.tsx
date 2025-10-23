@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Button from '@/components/Button'
 import Card from '@/components/Card'
+import { shareToTwitter, shareToLens, shareToFarcaster, generateHashtags } from '@/lib/social-utils'
 
 interface Post {
   id: string
