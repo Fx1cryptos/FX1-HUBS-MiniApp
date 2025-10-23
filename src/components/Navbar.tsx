@@ -19,13 +19,15 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="h-10 w-10 rounded-lg font-bold flex items-center justify-center uppercase tracking-widest" style={{background: 'linear-gradient(135deg, #2563eb 0%, #22d3ee 45%, #8b5cf6 100%)'}}>
-            FX1
-          </div>
+        <Link href="/" className="flex items-center gap-3">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2F88729acef763493d92799b4cc4136c4d?format=webp&width=100"
+            alt="FX1 Digital Hubs"
+            className="h-12 w-12 object-contain"
+          />
           <div>
-            <div className="text-sm font-semibold uppercase tracking-wider">FX1 Hubs</div>
-            <div className="text-xs text-white/50">Digital Fashion</div>
+            <div className="text-sm font-semibold uppercase tracking-wider">FX1 Digital Hubs</div>
+            <div className="text-xs text-white/50">Fashion • AI • Web3</div>
           </div>
         </Link>
 
