@@ -1,334 +1,366 @@
 'use client'
 
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import SocialLinks from '@/components/SocialLinks'
+import Link from 'next/link'
+import Button from '@/components/Button'
+import Card from '@/components/Card'
 
-type FeedItem = {
-  author: string
-  message: string
-}
-
-type MarketplaceItem = {
+interface Feature {
+  icon: string
   title: string
   description: string
-  cta: string
-  href: string
+  link: string
+  label: string
 }
 
-const navLinks = [
-  { label: '🔥 Streaks', href: '#streaks' },
-  { label: '📡 Social Feed', href: '#feed' },
-  { label: '🛒 Marketplace', href: '#marketplace' },
-  { label: '🤖 FX1 FLUX AI', href: '#flux-ai' },
+const features: Feature[] = [
+  {
+    icon: '🎨',
+    title: 'AI Studio',
+    description: 'Generate stunning NFT art with AI in any style',
+    link: '/studio',
+    label: 'Create Art',
+  },
+  {
+    icon: '🪙',
+    title: 'Mint NFTs',
+    description: 'Launch your creations on Base and Zora chains',
+    link: '/mint',
+    label: 'Start Minting',
+  },
+  {
+    icon: '📱',
+    title: 'Social Feed',
+    description: 'Share, engage, and earn $FDH tips',
+    link: '/feed',
+    label: 'Join Feed',
+  },
+  {
+    icon: '📊',
+    title: 'Dashboard',
+    description: 'Track your NFTs, earnings, and analytics',
+    link: '/dashboard',
+    label: 'My Dashboard',
+  },
+  {
+    icon: '💰',
+    title: '$FDH Token',
+    description: 'Earn rewards through staking and tips',
+    link: '/token',
+    label: 'Explore Token',
+  },
+  {
+    icon: '👥',
+    title: 'Creator Profile',
+    description: 'Build your onchain portfolio',
+    link: '/profile/your-username',
+    label: 'Create Profile',
+  },
 ]
 
-const feedItems: FeedItem[] = [
-  {
-    author: '@fx1_builder',
-    message: 'Just dropped a new NFT on Zora 🔥',
-  },
-  {
-    author: '@fdh_holders',
-    message: 'Earning streaks now live — connect wallet to start ⚡',
-  },
-]
-
-const marketplaceItems: MarketplaceItem[] = [
-  {
-    title: 'FX1 Builder Pass',
-    description: 'Access exclusive creator tools + $FDH boosts',
-    cta: 'Mint Now',
-    href: '/marketplace',
-  },
-  {
-    title: 'FX1 Flux Avatar',
-    description: 'Your onchain identity across Base & Farcaster',
-    cta: 'Buy on Zora',
-    href: 'https://zora.co/@fx1_hubs',
-  },
-]
-
-const responseTemplates = [
-  (prompt: string) => `Here\'s a content idea for your Web3 feed about ${prompt}.`,
-  (prompt: string) => `You could post a Farcaster thread: “${prompt} — powered by builders on Base.”`,
-  (prompt: string) => `Consider turning “${prompt}” into an NFT drop teaser.`,
-  (prompt: string) => `Let\'s amplify ${prompt} with a storytelling post on Zora + Warpcast.`,
-  (prompt: string) => `FX1 recommends tying ${prompt} to $FDH rewards this week!`,
+const stats = [
+  { value: '5,847', label: 'Creators' },
+  { value: '42,000+', label: 'NFTs Minted' },
+  { value: '$12.5M', label: 'Market Cap' },
+  { value: '100M', label: '$FDH Total' },
 ]
 
 export default function Home() {
-  const sceneRef = useRef<HTMLDivElement | null>(null)
-  const timeoutsRef = useRef<number[]>([])
-  const [streakCount, setStreakCount] = useState(5)
-  const [prompt, setPrompt] = useState('')
-  const [aiOutput, setAiOutput] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
-
-  useEffect(() => {
-    const scene = sceneRef.current
-    if (!scene) return
-
-    const updateScene = (event: MouseEvent | TouchEvent) => {
-      const rect = scene.getBoundingClientRect()
-      const point =
-        'touches' in event && event.touches.length > 0
-          ? event.touches[0]
-          : ('clientX' in event
-              ? { clientX: event.clientX, clientY: event.clientY }
-              : null)
-
-      if (!point) return
-
-      const x = point.clientX - rect.left - rect.width / 2
-      const y = point.clientY - rect.top - rect.height / 2
-      const px = x / rect.width
-      const py = y / rect.height
-
-      scene.style.setProperty('--px', px.toFixed(4))
-      scene.style.setProperty('--py', py.toFixed(4))
-    }
-
-    const resetScene = () => {
-      scene.style.setProperty('--px', '0')
-      scene.style.setProperty('--py', '0')
-    }
-
-    const handleMouseMove = (event: MouseEvent) => updateScene(event)
-    const handleTouchMove = (event: TouchEvent) => updateScene(event)
-
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('touchmove', handleTouchMove, { passive: true })
-    window.addEventListener('mouseleave', resetScene)
-    window.addEventListener('touchend', resetScene)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('touchmove', handleTouchMove)
-      window.removeEventListener('mouseleave', resetScene)
-      window.removeEventListener('touchend', resetScene)
-    }
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      timeoutsRef.current.forEach((id) => window.clearTimeout(id))
-      timeoutsRef.current = []
-    }
-  }, [])
-
-  const handleClaimStreak = () => {
-    setStreakCount((prev) => {
-      const next = prev + 1
-      if (typeof window !== 'undefined') {
-        window.alert('🔥 Streak updated! You’ve earned +1 $FDH Boost!')
-      }
-      return next
-    })
-  }
-
-  const pickResponse = (topic: string) => {
-    const template = responseTemplates[Math.floor(Math.random() * responseTemplates.length)]
-    return template(topic)
-  }
-
-  const clearTypingQueue = () => {
-    timeoutsRef.current.forEach((id) => window.clearTimeout(id))
-    timeoutsRef.current = []
-  }
-
-  const typeResponse = (text: string) => {
-    clearTypingQueue()
-    setIsTyping(true)
-    setAiOutput('')
-
-    Array.from(text).forEach((char, index) => {
-      const timeoutId = window.setTimeout(() => {
-        setAiOutput((prev) => prev + char)
-        if (index === text.length - 1) {
-          setIsTyping(false)
-        }
-      }, index * 40)
-
-      timeoutsRef.current.push(timeoutId)
-    })
-  }
-
-  const handleGenerate = () => {
-    const trimmed = prompt.trim()
-    if (!trimmed) {
-      setAiOutput('Please type your question first.')
-      return
-    }
-
-    setAiOutput('⚙️ Generating...')
-    clearTypingQueue()
-
-    const idea = pickResponse(trimmed)
-    const delayId = window.setTimeout(() => {
-      typeResponse(`FX1 FLUX AI: ${idea}`)
-    }, 220)
-
-    timeoutsRef.current.push(delayId)
-  }
-
   return (
-    <div className="page-root flex min-h-screen flex-col">
-      <header className="page-header z-40 flex items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-3">
-          <div className="logo-emblem flex h-10 w-10 items-center justify-center font-bold">FX1</div>
-          <div>
-            <h1 className="text-lg font-semibold tracking-[0.3em]">FX1 DIGITAL HUBS</h1>
-            <p className="-mt-1 text-sm text-white/60">AI • Fashion • NFTs • Onchain</p>
-          </div>
-        </div>
-
-        <nav className="flex items-center gap-3 text-sm">
-          {navLinks.map((item) => (
-            <a key={item.href} href={item.href} className="nav-link">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </header>
-
-      <main className="relative flex-1 overflow-hidden">
-        <section ref={sceneRef} className="parallax-scene" aria-labelledby="hero-title">
-          <div className="scene-bg" />
-          <div className="stars layer layer-1" />
-          <div className="layer layer-2" />
-
-          <div className="card floating layer depth-3" style={{ '--d': 0.1 } as CSSProperties}>
-            <h3 className="card-title">ONCHAIN FASHION</h3>
-            <p className="card-copy">Wearable NFTs &amp; runway drops</p>
-          </div>
-
-          <div className="card floating layer depth-6" style={{ '--d': -0.06 } as CSSProperties}>
-            <h3 className="card-title">AI COLLABS</h3>
-            <p className="card-copy">FX1 FLUX — create with AI</p>
-          </div>
-
-          <div className="card floating layer depth-4" style={{ '--d': 0.02 } as CSSProperties}>
-            <h3 className="card-title">MARKETPLACE</h3>
-            <p className="card-copy">Mint, list &amp; trade</p>
-          </div>
-
-          <div className="hero-content layer z-30" id="hero">
-            <h2 className="hero-title" id="hero-title">
-              Welcome to FX1 Digital Hubs
-            </h2>
-            <p className="hero-sub">
-              Earn. Build. Grow. — Powered by Web3 + AI.
+    <div className="min-h-screen bg-black text-white">
+      <main className="mx-auto max-w-7xl px-6 py-12">
+        {/* Hero Section */}
+        <section className="mb-20 text-center py-12">
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-widest mb-6">
+              <span className="bg-gradient-to-r from-sky-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                FX1 Digital Hubs
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-4">
+              The all-in-one platform for Web3 creators, artists, and digital innovators
             </p>
-
-            <div className="hero-actions">
-              <button type="button" className="btn-primary">
-                Connect Wallet
-              </button>
-              <a href="#marketplace" className="btn-outline">
-                Explore Marketplace
-              </a>
-              <a href="#flux-ai" className="btn-outline">
-                Launch FX1 FLUX AI
-              </a>
-            </div>
-
-            <div className="hero-streak">
-              <span className="mr-3">Builders streak:</span>
-              <span className="streak-pill">{streakCount} days 🔥</span>
-            </div>
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
+              Create AI-generated NFT art, mint on Base and Zora, engage with the community, and earn $FDH rewards
+            </p>
           </div>
 
-          <div className="vignette layer z-20" />
-        </section>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link href="/studio">
+              <Button size="lg">
+                ✨ Launch App
+              </Button>
+            </Link>
+            <Link href="/ecosystem">
+              <Button variant="outline" size="lg">
+                📖 Learn More
+              </Button>
+            </Link>
+          </div>
 
-        <section id="streaks" className="content-section">
-          <div className="section-shell">
-            <div className="section-header">
-              <h3 className="section-heading">Daily Streaks</h3>
-              <p className="section-subhead">Stay consistent to unlock boosts and builder perks.</p>
-            </div>
-            <div className="streak-card">
-              <div>
-                <p className="streak-label">Your current streak</p>
-                <p className="streak-value">{streakCount} days</p>
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            {stats.map((stat, i) => (
+              <div key={i} className="p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
+                <p className="text-2xl md:text-3xl font-bold text-sky-300">{stat.value}</p>
+                <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">{stat.label}</p>
               </div>
-              <button type="button" className="btn-secondary" onClick={handleClaimStreak}>
-                Claim Daily Reward
-              </button>
-            </div>
+            ))}
           </div>
         </section>
 
-        <section id="feed" className="content-section">
-          <div className="section-shell">
-            <div className="section-header">
-              <h3 className="section-heading">Onchain Feed</h3>
-              <p className="section-subhead">Live snapshots from FX1 builders across Farcaster.</p>
-            </div>
-            <div className="feed-grid">
-              {feedItems.map((item) => (
-                <article key={item.author} className="feed-card">
-                  <span className="feed-author">{item.author}</span>
-                  <p className="feed-message">{item.message}</p>
-                </article>
-              ))}
-            </div>
+        {/* Features Grid */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
+              Core Features
+            </h2>
+            <p className="text-white/70">Everything you need to create, mint, and connect in Web3</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, i) => (
+              <Link key={i} href={feature.link}>
+                <Card className="group hover:border-sky-400/50 h-full cursor-pointer transition-all duration-300">
+                  <div className="flex flex-col h-full">
+                    <div className="text-5xl mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-bold uppercase tracking-wider mb-3">{feature.title}</h3>
+                    <p className="text-white/70 flex-grow mb-6">{feature.description}</p>
+                    <Button variant="outline" size="sm" className="w-full">
+                      {feature.label}
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
+            ))}
           </div>
         </section>
 
-        <section id="marketplace" className="content-section">
-          <div className="section-shell">
-            <div className="section-header">
-              <h3 className="section-heading">FX1 Marketplace</h3>
-              <p className="section-subhead">Mint, collect, and trade across Base &amp; Zora.</p>
+        {/* How It Works */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
+              How It Works
+            </h2>
+            <p className="text-white/70">From idea to onchain creation in 4 simple steps</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                step: '1',
+                title: 'Create with AI',
+                description: 'Use FX1 FLUX AI to generate unique NFT art from prompts',
+              },
+              {
+                step: '2',
+                title: 'Mint on Chain',
+                description: 'Launch your creation as an NFT on Base or Zora',
+              },
+              {
+                step: '3',
+                title: 'Share & Engage',
+                description: 'Post to the social feed and engage with the community',
+              },
+              {
+                step: '4',
+                title: 'Earn Rewards',
+                description: 'Collect $FDH tips and stake for passive income',
+              },
+            ].map((item, i) => (
+              <Card key={i} className="border-sky-400/30 bg-gradient-to-br from-sky-400/10 to-transparent">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="h-10 w-10 rounded-full bg-sky-400/30 flex items-center justify-center font-bold text-sky-300 text-lg">
+                    {item.step}
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold uppercase tracking-wider mb-2">{item.title}</h3>
+                <p className="text-white/70">{item.description}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Featured Collections */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
+              Featured Collections
+            </h2>
+            <p className="text-white/70">Trending creations from the FX1 community</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: 'Digital Fashion Series 1', creator: '@designer_001', items: 42, volume: '145.5 ETH' },
+              { name: 'Metaverse Avatars Gen 2', creator: '@artist_labs', items: 28, volume: '89.2 ETH' },
+              { name: 'Web3 Fashion Week', creator: '@fx1_collective', items: 156, volume: '340.8 ETH' },
+            ].map((collection, i) => (
+              <Card key={i}>
+                <div className="h-40 rounded-lg bg-gradient-to-br from-sky-400/20 to-purple-500/20 flex items-center justify-center mb-4">
+                  <span className="text-5xl">
+                    {i === 0 ? '👗' : i === 1 ? '👤' : '🌐'}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">{collection.name}</h3>
+                <p className="text-sm text-white/60 mb-4">{collection.creator}</p>
+                <div className="flex justify-between text-sm mb-4">
+                  <span className="text-white/70">{collection.items} items</span>
+                  <span className="text-sky-300 font-semibold">{collection.volume}</span>
+                </div>
+                <Button variant="outline" size="sm" className="w-full">
+                  View Collection
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="mb-20">
+          <Card className="border-sky-400/50 bg-gradient-to-r from-sky-400/20 via-purple-500/20 to-pink-500/20 p-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-6">
+              Ready to Create?
+            </h2>
+            <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+              Join thousands of creators building the future of digital fashion and Web3 culture
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/studio">
+                <Button size="lg">Start Creating Now</Button>
+              </Link>
+              <Link href="/ecosystem">
+                <Button variant="outline" size="lg">
+                  Explore Ecosystem
+                </Button>
+              </Link>
             </div>
-            <div className="market-grid">
-              {marketplaceItems.map((item) => (
-                <article key={item.title} className="market-card">
-                  <div className="market-visual" aria-hidden="true" />
-                  <h4 className="market-title">{item.title}</h4>
-                  <p className="market-copy">{item.description}</p>
-                  <a href={item.href} className="btn-primary" target="_blank" rel="noreferrer">
-                    {item.cta}
+          </Card>
+        </section>
+
+        {/* Testimonials / Community */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4">
+              Trusted by Creators
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: '@designer_dx', feedback: 'FX1 made it so easy to create and mint my first NFT collection!' },
+              { name: '@artist_web3', feedback: 'The AI assistance and community tips have transformed my income.' },
+              { name: '@creator_labs', feedback: 'Best all-in-one platform for Web3 creators. Highly recommend!' },
+            ].map((testimonial, i) => (
+              <Card key={i} className="border-white/10">
+                <div className="flex gap-2 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <span key={j} className="text-yellow-400">
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <p className="text-white/80 mb-4 italic">"{testimonial.feedback}"</p>
+                <p className="text-sm font-semibold text-sky-300">{testimonial.name}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer Links */}
+        <section className="border-t border-white/10 pt-12 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div>
+              <h3 className="font-bold uppercase tracking-wider mb-3">Product</h3>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li>
+                  <Link href="/studio" className="hover:text-white transition">
+                    Studio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/mint" className="hover:text-white transition">
+                    Mint
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/feed" className="hover:text-white transition">
+                    Feed
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold uppercase tracking-wider mb-3">Community</h3>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li>
+                  <Link href="/ecosystem" className="hover:text-white transition">
+                    Ecosystem
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Discord
                   </a>
-                </article>
-              ))}
+                </li>
+                <li>
+                  <a href="https://twitter.com/fx1_hubs" className="hover:text-white transition">
+                    Twitter
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold uppercase tracking-wider mb-3">Learn</h3>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li>
+                  <Link href="/token" className="hover:text-white transition">
+                    $FDH Token
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Docs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold uppercase tracking-wider mb-3">Chains</h3>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li>
+                  <a href="https://base.org" className="hover:text-white transition">
+                    Base
+                  </a>
+                </li>
+                <li>
+                  <a href="https://zora.co" className="hover:text-white transition">
+                    Zora
+                  </a>
+                </li>
+                <li>
+                  <a href="https://farcaster.xyz" className="hover:text-white transition">
+                    Farcaster
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-        </section>
 
-        <section id="flux-ai" className="content-section">
-          <div className="section-shell">
-            <div className="section-header">
-              <h3 className="section-heading">FX1 FLUX AI Agent</h3>
-              <p className="section-subhead">Generate ideas, trends, and posts to grow your reach.</p>
-            </div>
-            <div className="ai-panel">
-              <textarea
-                id="ai-input"
-                className="ai-textarea"
-                placeholder="Ask FX1 FLUX anything..."
-                value={prompt}
-                onChange={(event) => setPrompt(event.target.value)}
-              />
-              <button type="button" className="btn-primary" onClick={handleGenerate} disabled={isTyping}>
-                {isTyping ? 'Generating…' : 'Generate'}
-              </button>
-              <div id="ai-response" className="ai-response" aria-live="polite">
-                {aiOutput}
-              </div>
-            </div>
+          <div className="border-t border-white/10 pt-8 pb-8">
+            <p className="text-white/60">
+              © {new Date().getFullYear()} FX1 DIGITAL HUBS — Powering the Future of Web3 Creation
+            </p>
+            <p className="text-sm text-white/50 mt-2">
+              Create • Mint • Connect. All in One Decentralized Hub.
+            </p>
           </div>
         </section>
-
-        <aside className="socials-panel z-40">
-          <SocialLinks />
-        </aside>
       </main>
-
-      <footer className="page-footer">
-        © {new Date().getFullYear()} FX1 DIGITAL HUBS — Built for Builders on Base &amp; Farcaster
-      </footer>
     </div>
   )
 }
