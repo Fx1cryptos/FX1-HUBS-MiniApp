@@ -172,13 +172,46 @@ export default function FeedPage() {
                 <div className="mt-4 p-3 rounded-lg bg-white/5 border border-white/10">
                   <p className="text-xs text-white/60 mb-2">Share to:</p>
                   <div className="flex gap-2">
-                    <Button variant="secondary" size="sm">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() =>
+                        shareToTwitter({
+                          url: window.location.href,
+                          title: 'FX1 Digital Hubs',
+                          text: post.content,
+                          hashtags: post.hashtags,
+                        })
+                      }
+                    >
                       𝕏 Twitter
                     </Button>
-                    <Button variant="secondary" size="sm">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() =>
+                        shareToLens({
+                          url: window.location.href,
+                          title: 'FX1 Digital Hubs',
+                          text: post.content,
+                          hashtags: post.hashtags,
+                        })
+                      }
+                    >
                       🟣 Lens
                     </Button>
-                    <Button variant="secondary" size="sm">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() =>
+                        shareToFarcaster({
+                          url: window.location.href,
+                          title: 'FX1 Digital Hubs',
+                          text: post.content,
+                          hashtags: post.hashtags,
+                        })
+                      }
+                    >
                       👾 Farcaster
                     </Button>
                   </div>
