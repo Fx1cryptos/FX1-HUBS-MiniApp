@@ -34,7 +34,7 @@ const tokenMetrics: TokenMetrics = {
 const rewardTiers: RewardTier[] = [
   {
     name: 'Creator',
-    requirement: 1000+ $FDH',
+    requirement: '1000+ $FDH',
     benefits: ['10% APY', 'Creator Badge', 'Priority Listing'],
     apy: '10%',
   },
