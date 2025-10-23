@@ -1,434 +1,575 @@
-# FX1 DIGITAL HUBS - Developer Setup Guide
+# FX1 Digital Hubs - Complete Setup Guide
 
-Complete guide to set up and run FX1 Digital Hubs locally and deploy to production.
+## 🚀 Welcome to FX1 Digital Hubs
 
----
+**FX1 Digital Hubs** is an all-in-one AI-powered NFT and social platform connecting creators, traders, and Web3 explorers across Zora, Base, Lens, and Farcaster.
 
-## 📋 Prerequisites
-
-- **Node.js**: 18.17 or later
-- **npm**: 9+ or **yarn**: 1.22+
-- **Git**: Latest version
-- **Wallet**: MetaMask, Phantom, or Nightly wallet installed
-- **Code Editor**: VS Code recommended
+This guide covers installation, configuration, and usage of all features.
 
 ---
 
-## 🚀 Quick Start
+## 📋 Table of Contents
 
-### 1. Clone the Repository
+1. [Quick Start](#quick-start)
+2. [Project Structure](#project-structure)
+3. [Feature Overview](#feature-overview)
+4. [API Routes](#api-routes)
+5. [Environment Variables](#environment-variables)
+6. [Web3 Integration](#web3-integration)
+7. [Deployment](#deployment)
+
+---
+
+## 🏃 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn package manager
+- Wallet with Base mainnet access (MetaMask, Phantom, or Nightly)
+
+### Installation
 
 ```bash
-git clone https://github.com/fx1cryptos/FX1-DIGITAL-HUBS.git
-cd FX1-DIGITAL-HUBS
-```
-
-### 2. Install Dependencies
-
-```bash
+# Install dependencies
 npm install
-# or
-yarn install
-```
 
-### 3. Create Environment Variables
+# Set up environment variables (see section below)
+# Copy .env.example to .env.local and fill in your keys
 
-Copy the example environment file and fill in your API keys:
-
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local` with your API keys (see Configuration section below).
-
-### 4. Run Development Server
-
-```bash
+# Run development server
 npm run dev
-# or
-yarn dev
+
+# Visit http://localhost:3000
 ```
 
-The app will be available at `http://localhost:3000`
+### Environment Variables
 
-### 5. Build for Production
+Copy these into your `.env.local` file:
 
-```bash
-npm run build
-npm start
-# or
-yarn build
-yarn start
-```
+```env
+# Web3 & Blockchain
+NEXT_PUBLIC_RPC_URL=https://mainnet.base.org
+PRIVATE_KEY=your_private_key_here
+WALLET_ADDRESS=your_wallet_address
 
----
+# AI & Art Generation
+RUNWARE_API_KEY=your_runware_api_key
+ALCHEMY_API_KEY=your_alchemy_api_key
 
-## ⚙️ Configuration
+# NFT Platforms
+ZORA_API_KEY=your_zora_api_key
+PINATA_API_KEY=your_pinata_api_key
+PINATA_SECRET_API_KEY=your_pinata_secret
 
-### Essential API Keys
+# Blockchain Explorers
+BASE_SCAN_API=your_basescan_api_key
 
-#### 1. Alchemy (RPC Provider)
+# Web3 Services
+COINBASE_API=your_coinbase_api_key
+COINBASE_SECRET=your_coinbase_secret
 
-1. Go to [alchemy.com](https://www.alchemy.com)
-2. Sign up and create an app
-3. Copy your API key and RPC URL
-4. Add to `.env.local`:
-   ```
-   NEXT_PUBLIC_ALCHEMY_API_KEY=your_key
-   ALCHEMY_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/your_key
-   ```
-
-#### 2. WalletConnect (Multi-Wallet Support)
-
-1. Visit [walletconnect.com](https://walletconnect.com)
-2. Create a project
-3. Copy your Project ID
-4. Add to `.env.local`:
-   ```
-   NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_project_id
-   ```
-
-#### 3. OpenAI API (AI Art Generation)
-
-1. Go to [openai.com](https://platform.openai.com)
-2. Create an account and API key
-3. Add to `.env.local`:
-   ```
-   OPENAI_API_KEY=sk-your_key
-   ```
-
-#### 4. Pinata (IPFS Storage)
-
-1. Sign up at [pinata.cloud](https://www.pinata.cloud)
-2. Generate API keys
-3. Add to `.env.local`:
-   ```
-   PINATA_API_KEY=your_key
-   PINATA_SECRET_KEY=your_secret
-   ```
-
-#### 5. Zora API (NFT Minting)
-
-1. Register at [zora.co](https://zora.co)
-2. Get your API key from dashboard
-3. Add to `.env.local`:
-   ```
-   ZORA_API_KEY=your_key
-   ```
-
----
-
-## 🔗 Smart Contract Setup (Optional)
-
-### Deploy Smart Contracts
-
-If you want to use custom smart contracts:
-
-1. Install Hardhat:
-   ```bash
-   npm install --save-dev hardhat
-   npx hardhat
-   ```
-
-2. Place contracts in `contracts/` directory
-
-3. Deploy to Base Sepolia:
-   ```bash
-   npx hardhat run scripts/deploy.js --network base-sepolia
-   ```
-
-4. Add contract addresses to `.env.local`:
-   ```
-   NEXT_PUBLIC_NFT_CONTRACT_ADDRESS=0x...
-   NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS=0x...
-   ```
-
----
-
-## 🧪 Testing
-
-### Run Tests
-
-```bash
-npm test
-# or
-yarn test
-```
-
-### Test Coverage
-
-```bash
-npm run test:coverage
+# Social Integration
+THIRDWEB_CLIENT_ID=your_thirdweb_client_id
+THIRDWEB_SECRET=your_thirdweb_secret
 ```
 
 ---
 
-## 📝 Code Structure & Conventions
-
-### Directory Organization
-
-- **`/src/app`** - Next.js App Router pages
-- **`/src/components`** - Reusable React components
-- **`/src/lib`** - Utility functions and configs
-- **`/src/types`** - TypeScript interfaces
-- **`/src/app/api`** - API routes
-
-### Naming Conventions
-
-- **Components**: PascalCase (e.g., `Button.tsx`)
-- **Pages**: kebab-case folders (e.g., `/studio/page.tsx`)
-- **Types/Interfaces**: PascalCase (e.g., `UserProfile`)
-- **Utilities**: camelCase (e.g., `formatAddress()`)
-
-### File Naming
+## 📁 Project Structure
 
 ```
-/components
-  ├── Button.tsx           # Single component
-  ├── Card.tsx
-  ├── Modal.tsx
-  └── SocialLinks.tsx
-
-/lib
-  ├── web3-config.ts      # Configuration files
-  ├── utils.ts             # Utility functions
-  └── pinata.ts            # External service integrations
-
-/types
-  └── web3.ts             # Type definitions
-
-/app/api
-  ├── generate-art/route.ts
-  ├── mint-nft/route.ts
-  └── posts/route.ts
+src/
+├── app/
+│   ├── api/
+│   │   ├── generate-art/          # AI art generation endpoint
+│   │   ├── mint-nft/              # NFT minting endpoint
+│   │   ├── nft/
+│   │   │   └── zora/              # Zora integration
+│   │   ├── posts/                 # Social feed posts
+│   │   └── user/[address]/        # User profile endpoints
+│   ├── about/                     # About page
+│   ├── dashboard/                 # User dashboard
+│   ├── ecosystem/                 # Ecosystem & projects page
+│   ├── feed/                      # Social feed
+│   ├── mint/                      # NFT minting interface
+│   ├── profile/[username]/        # Creator profiles
+│   ├── studio/                    # AI art studio
+│   ├── token/                     # Token dashboard
+│   ├── globals.css                # Global styles
+│   ├── layout.tsx                 # Root layout
+│   └── page.tsx                   # Home page
+├── components/
+│   ├── Badge.tsx                  # Badge component
+│   ├── Button.tsx                 # Button component
+│   ├── Card.tsx                   # Card component
+│   ├── Footer.tsx                 # Footer
+│   ├── Input.tsx                  # Input field
+│   ├── Modal.tsx                  # Modal dialog
+│   ├── Navbar.tsx                 # Navigation
+│   └── SocialLinks.tsx            # Social media links
+├── lib/
+│   ├── ai-utils.ts                # AI & art generation utilities
+│   ├── social-utils.ts            # Social sharing functions
+│   ├── token-utils.ts             # Token & blockchain utilities
+│   └── web3-config.ts             # Web3 configuration
+├── types/
+│   └── web3.ts                    # TypeScript types
+├── utils/
+│   └── pinata.ts                  # Pinata IPFS utilities
+├── tailwind.config.ts             # TailwindCSS config
+├── tsconfig.json                  # TypeScript config
+└── next.config.js                 # Next.js config
 ```
 
 ---
 
-## 🎨 Styling Guidelines
+## ✨ Feature Overview
 
-### TailwindCSS Conventions
+### 1. **AI Studio** (`/studio`)
 
-- Use TailwindCSS utility classes for styling
-- Define custom component classes in `/app/globals.css`
-- Use `@apply` directive for component abstractions
+Generate stunning NFT art using AI with customizable styles:
 
-Example:
+- **Text-to-Image**: Describe what you want, get instant AI art
+- **Style Options**: Fashion, Metaverse, Meme, DeFi, Avatar, NFT Card, Runway
+- **One-Click Mint**: Directly mint generated art as NFTs
+- **Prompt Library**: Pre-built examples for inspiration
 
-```css
-@layer components {
-  .btn-primary {
-    @apply rounded-full px-6 py-3 text-sm uppercase tracking-widest font-semibold;
-    background: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #a855f7 100%);
-  }
+**Example Usage:**
+
+```typescript
+// Generate art with FX1 FLUX AI
+const result = await generateArtWithRunware({
+  prompt: "Digital fashion with gold accents",
+  style: "Fashion",
+  width: 512,
+  height: 512,
+});
+```
+
+### 2. **Minting Hub** (`/mint`)
+
+Mint NFTs directly to Zora or Base:
+
+- **Wallet Connect**: MetaMask, Phantom, Nightly
+- **Chain Selection**: Base or Zora
+- **Metadata Management**: Name, description, royalties
+- **Edition Size**: Create limited editions or unlimited supply
+- **Transaction Tracking**: View mint status and explorer links
+
+**Example Usage:**
+
+```typescript
+// Mint NFT on Zora
+const response = await fetch('/api/mint-nft', {
+  method: 'POST',
+  body: JSON.stringify({
+    name: "My Digital Art",
+    description: "Created with FX1 AI",
+    image: "ipfs://...",
+    chain: "zora",
+    supply: 1,
+    royaltyPercentage: 10,
+  }),
+});
+```
+
+### 3. **Social Feed** (`/feed`)
+
+Share and engage with creator community:
+
+- **Create Posts**: Share your NFTs and ideas
+- **Engagement**: Like, comment, and tip in $FDH
+- **Hashtags**: Auto-discover trending topics
+- **Social Sharing**: Share to X, Lens, Farcaster
+- **Creator Rewards**: Earn $FDH from community tips
+
+**Example Usage:**
+
+```typescript
+// Share post to Twitter
+shareToTwitter({
+  url: "https://fx1-hubs.app/nft/my-art",
+  title: "My NFT",
+  text: "Check out my new NFT!",
+  hashtags: ["#NFT", "#Web3", "#FX1"],
+});
+```
+
+### 4. **Dashboard** (`/dashboard`)
+
+Track your creator journey:
+
+- **NFT Collections**: View and manage your creations
+- **Wallet Info**: Connected wallet and balance
+- **$FDH Staking**: Earn rewards by staking tokens
+- **Activity Timeline**: Track all interactions
+- **Analytics**: Engagement metrics and earnings
+
+### 5. **Token Dashboard** (`/token`)
+
+$FDH token hub:
+
+- **Live Metrics**: Price, market cap, volume, holders
+- **Reward Tiers**: Creator, Artist, Founder with APY
+- **Tokenomics**: Supply distribution
+- **Buy Interface**: Purchase $FDH directly
+- **Staking**: Earn passive income
+
+### 6. **Creator Profiles** (`/profile/[username]`)
+
+Showcase your work:
+
+- **Custom Profile**: Banner, avatar, bio
+- **NFT Gallery**: Display all your creations
+- **Stats**: Floor price, volume, unique collectors
+- **Social Links**: X, Lens, Farcaster connections
+- **Creator Tier**: Display your FX1 tier
+
+### 7. **Ecosystem Page** (`/ecosystem`)
+
+Discover FX1 projects:
+
+- **FX1 FLUX AI**: AI assistant for creators
+- **Digital Wardrobe**: Virtual fashion NFTs
+- **SolHubs**: Solana expansion
+- **Creator Academy**: Educational platform
+- **Technology Stack**: Full architecture overview
+
+---
+
+## 🔌 API Routes
+
+### Art Generation
+
+**POST** `/api/generate-art`
+
+Generate AI art with specified style.
+
+```json
+{
+  "prompt": "futuristic fashion design",
+  "style": "Fashion"
+}
+```
+
+Response:
+
+```json
+{
+  "image": "https://...",
+  "prompt": "enhanced prompt",
+  "style": "Fashion"
+}
+```
+
+### Minting
+
+**POST** `/api/mint-nft`
+
+Mint NFT on selected blockchain.
+
+```json
+{
+  "name": "My NFT",
+  "description": "Description",
+  "image": "ipfs://...",
+  "prompt": "original prompt",
+  "royaltyPercentage": 10,
+  "chain": "base",
+  "supply": 1
+}
+```
+
+### Zora Integration
+
+**POST** `/api/nft/zora`
+
+Mint directly on Zora.
+
+```json
+{
+  "tokenName": "My NFT",
+  "tokenDescription": "Description",
+  "imageUrl": "ipfs://...",
+  "royaltyPercentage": 10,
+  "chainId": 7777777
+}
+```
+
+### Social Posts
+
+**GET** `/api/posts?limit=10&offset=0`
+
+Fetch feed posts.
+
+**POST** `/api/posts`
+
+Create new post.
+
+```json
+{
+  "content": "Check out my NFT!",
+  "image": "ipfs://...",
+  "hashtags": ["#NFT", "#Web3"],
+  "authorAddress": "0x..."
+}
+```
+
+### User Profile
+
+**GET** `/api/user/[address]`
+
+Fetch user profile.
+
+**PUT** `/api/user/[address]`
+
+Update user profile.
+
+```json
+{
+  "username": "@creator",
+  "bio": "Digital artist",
+  "avatar": "ipfs://...",
+  "fdhBalance": "15000"
 }
 ```
 
 ---
 
-## 🌐 Deployment
+## 🌐 Web3 Integration
 
-### Deploy to Vercel (Recommended)
+### Wallet Connection
 
-1. **Connect GitHub Repository**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Select GitHub repository
+The app supports three wallet providers:
 
-2. **Add Environment Variables**
-   - In Vercel dashboard, go to Settings > Environment Variables
-   - Add all variables from `.env.local`
+1. **MetaMask** - Browser extension
+2. **Phantom** - Multi-chain wallet
+3. **Nightly** - Web3 wallet
 
-3. **Deploy**
-   - Vercel automatically deploys on push to main branch
+### Configuration
 
-4. **Custom Domain** (Optional)
-   - In Vercel Settings > Domains
-   - Add your custom domain
+```typescript
+// src/lib/web3-config.ts
+import { createConfig, http } from 'wagmi'
+import { base, baseSepolia } from 'wagmi/chains'
 
-### Deploy to Other Platforms
-
-#### Netlify
-
-```bash
-npm run build
-# Connect to Netlify and set build command: npm run build
-# Set publish directory: .next
-```
-
-#### AWS Amplify
-
-```bash
-amplify init
-amplify add hosting
-amplify publish
-```
-
-#### Self-Hosted (Docker)
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
----
-
-## 🐛 Debugging
-
-### Local Debugging
-
-1. **Browser DevTools**
-   - Open DevTools (F12)
-   - Check Console for errors
-   - Use Network tab to inspect API calls
-
-2. **VS Code Debugging**
-   Add to `.vscode/launch.json`:
-   ```json
-   {
-     "version": "0.2.0",
-     "configurations": [
-       {
-         "name": "Next.js",
-         "type": "node",
-         "request": "launch",
-         "program": "${workspaceFolder}/node_modules/.bin/next",
-         "args": ["dev"],
-         "console": "integratedTerminal"
-       }
-     ]
-   }
-   ```
-
-3. **Logging**
-   Use `console.log()` or install a logger like winston:
-   ```bash
-   npm install winston
-   ```
-
----
-
-## 📚 Useful Resources
-
-### Documentation
-- [Next.js Docs](https://nextjs.org/docs)
-- [React Docs](https://react.dev)
-- [TailwindCSS Docs](https://tailwindcss.com/docs)
-- [Wagmi Docs](https://wagmi.sh)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-
-### Web3 Resources
-- [Ethereum Docs](https://ethereum.org/developers)
-- [Zora Docs](https://docs.zora.co)
-- [Base Docs](https://docs.base.org)
-- [Viem Docs](https://viem.sh)
-
-### External APIs
-- [OpenAI API Reference](https://platform.openai.com/docs/api-reference)
-- [Pinata API Docs](https://docs.pinata.cloud)
-- [Alchemy API](https://docs.alchemy.com)
-
----
-
-## 🔐 Security Checklist
-
-- [ ] Never commit `.env.local` to git
-- [ ] Rotate API keys regularly
-- [ ] Use environment variables for all secrets
-- [ ] Validate all user inputs
-- [ ] HTTPS only in production
-- [ ] Enable CORS properly
-- [ ] Use secure headers (CSP, X-Frame-Options)
-- [ ] Keep dependencies updated
-- [ ] Audit smart contracts before deployment
-
----
-
-## 📊 Performance Optimization
-
-### Image Optimization
-```tsx
-import Image from 'next/image'
-
-<Image
-  src="/image.webp"
-  alt="Description"
-  width={500}
-  height={500}
-  priority
-/>
-```
-
-### Code Splitting
-Next.js automatically splits code by route. Use dynamic imports:
-
-```tsx
-import dynamic from 'next/dynamic'
-
-const DynamicComponent = dynamic(() => import('./Component'), {
-  loading: () => <Spinner />,
+export const wagmiConfig = createConfig({
+  chains: [base, baseSepolia],
+  transports: {
+    [base.id]: http(),
+    [baseSepolia.id]: http(),
+  },
 })
 ```
 
-### Caching
-Set cache headers for API responses:
+### Using Web3 Utilities
 
-```ts
-res.setHeader('Cache-Control', 'public, s-maxage=3600')
+```typescript
+import {
+  formatTokenAmount,
+  parseTokenAmount,
+  shortenAddress,
+  fetchTokenPrice,
+} from '@/lib/token-utils'
+
+// Format token for display
+const display = formatTokenAmount('1000000000000000000', 18) // "1.0000"
+
+// Parse user input
+const amount = parseTokenAmount('100', 18)
+
+// Shorten wallet address
+const short = shortenAddress('0x1234...5678') // "0x12...78"
+
+// Get current price
+const price = await fetchTokenPrice('FDH')
 ```
 
 ---
 
-## ❓ Troubleshooting
+## 🎨 Styling & Design
 
-### Port Already in Use
+### Colors
 
-```bash
-# On macOS/Linux
-lsof -i :3000
-kill -9 <PID>
+- **Primary**: Sky blue (`#38bdf8`)
+- **Secondary**: Purple (`#8b5cf6`)
+- **Accent**: Gold (`#d4af37`)
+- **Background**: Navy black (`#0b0f1a`)
 
-# On Windows
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
+### Typography
+
+- **Font**: Inter + Space Grotesk
+- **Weights**: 400, 600, 700
+- **Tracking**: 0.3em - 0.4em for headers
+
+### Components
+
+All UI components extend the base design system:
+
+```typescript
+// Button variants
+<Button variant="primary" size="lg">Create</Button>
+<Button variant="secondary">Cancel</Button>
+<Button variant="outline">Learn More</Button>
+<Button variant="ghost">Link</Button>
+
+// Card usage
+<Card>
+  <h3>Title</h3>
+  <p>Content</p>
+</Card>
+
+// Badge
+<Badge variant="success">Active</Badge>
+<Badge variant="warning">Pending</Badge>
+
+// Input
+<Input label="Email" type="email" placeholder="your@email.com" />
 ```
 
-### Dependencies Not Installing
+---
+
+## 📦 Deployment
+
+### Deploy to Vercel
 
 ```bash
-rm -rf node_modules package-lock.json
+# Push to GitHub
+git push origin main
+
+# Vercel auto-deploys from GitHub
+
+# Or manual deploy
+vercel deploy --prod
+```
+
+### Environment Variables on Vercel
+
+1. Go to Project Settings → Environment Variables
+2. Add all variables from your `.env.local`
+3. Mark sensitive keys appropriately
+
+### Pre-deployment Checklist
+
+- [ ] All API keys configured
+- [ ] Wallet addresses verified
+- [ ] Gas settings optimized for Base
+- [ ] IPFS pinning set up (Pinata)
+- [ ] Social links updated
+- [ ] Domain configured
+- [ ] Analytics set up
+
+---
+
+## 🔐 Security Best Practices
+
+1. **Never commit secrets** to git
+2. **Use environment variables** for all credentials
+3. **Validate all inputs** on backend
+4. **Use HTTPS only** in production
+5. **Enable wallet signing** for transactions
+6. **Rate limit** API endpoints
+7. **Sanitize user content** before storing
+
+---
+
+## 🐛 Troubleshooting
+
+### Dev Server Won't Start
+
+```bash
+# Clear cache and node_modules
+rm -rf node_modules .next
 npm install
+npm run dev
 ```
 
-### TypeScript Errors
+### Wallet Connection Fails
+
+- Check network is set to Base mainnet
+- Clear browser cache and restart MetaMask
+- Ensure sufficient balance for gas
+
+### API Routes Not Working
+
+- Check environment variables are set
+- Verify API keys are active
+- Check browser console for errors
+- Test endpoints with curl/Postman
+
+### Build Fails
 
 ```bash
-npm run build
-# Check for type errors
+# Build with verbose output
+npm run build -- --debug
+
+# Check for TypeScript errors
+npx tsc --noEmit
 ```
 
-### Wallet Connection Issues
+---
 
-- Ensure wallet is on correct network (Base or Sepolia)
-- Try refreshing the page
-- Clear browser cache and cookies
-- Switch to a different wallet provider
+## 📚 Additional Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TailwindCSS](https://tailwindcss.com)
+- [Wagmi Documentation](https://wagmi.sh)
+- [Base Network](https://base.org)
+- [Zora Protocol](https://zora.co)
+- [Pinata IPFS](https://pinata.cloud)
 
 ---
 
-## 📞 Support
+## 🤝 Contributing
 
-- **Issues**: Open GitHub Issues for bugs
-- **Discussions**: Use GitHub Discussions for questions
-- **Discord**: Join our community Discord
-- **Email**: support@fx1.digital
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ---
 
-**Happy building! 🚀**
+## 📄 License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+---
+
+## 💬 Support & Community
+
+- **Discord**: [Join Community](https://discord.gg/fx1)
+- **Twitter**: [@fx1_hubs](https://twitter.com/fx1_hubs)
+- **Email**: support@fx1-hubs.app
+- **Docs**: https://docs.fx1-hubs.app
+
+---
+
+## 🌟 Roadmap
+
+### Q1 2024
+
+- [ ] Farcaster Frame integration
+- [ ] Enhanced AI model support
+- [ ] Creator referral program
+
+### Q2 2024
+
+- [ ] DAO governance
+- [ ] Advanced analytics dashboard
+- [ ] Creator marketplace
+
+### Q3 2024
+
+- [ ] Mobile app launch
+- [ ] Metaverse integration
+- [ ] Cross-chain swaps
+
+---
+
+**Built with ❤️ by FX1 Digital Hubs**
+
+_"Styling the Blockchain. Designing the Future."_
