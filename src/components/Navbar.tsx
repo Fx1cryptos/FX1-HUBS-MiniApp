@@ -45,7 +45,7 @@ export default function Navbar() {
         <div className="relative">
           <button
             onClick={() => setIsWalletOpen(!isWalletOpen)}
-            className="px-6 py-2 text-sm uppercase tracking-widest font-semibold rounded-full bg-gradient-to-r from-sky-400 to-purple-500 text-black hover:brightness-110 transition-all"
+            className="px-6 py-2 text-sm uppercase tracking-widest font-semibold rounded-full bg-gradient-to-r from-[#4169E1] to-[#FFD700] text-black hover:brightness-110 transition-all shadow-lg"
           >
             Connect Wallet
           </button>
