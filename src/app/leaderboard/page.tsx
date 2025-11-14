@@ -73,6 +73,9 @@ export default function Leaderboard() {
           </div>
         </section>
 
+        {/* Weekly NFT Rewards Section */}
+        <WeeklyNFTRewards />
+
         {/* Leaderboard Table */}
         <section className="mb-16">
           <Card className="border-[#4169E1]/50 bg-black/70 overflow-hidden">
