@@ -5,13 +5,13 @@ import { useState } from 'react'
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/studio', label: 'Studio' },
   { href: '/mint', label: 'Mint' },
   { href: '/feed', label: 'Feed' },
   { href: '/dashboard', label: 'Dashboard' },
-  { href: '/token', label: '$FDH' },
-  { href: '/ecosystem', label: 'Ecosystem' },
+  { href: '/wardrobe', label: 'Wardrobe' },
+  { href: '/token-utilities', label: 'Tokens' },
+  { href: '/connect', label: 'Connect' },
 ]
 
 export default function Navbar() {
