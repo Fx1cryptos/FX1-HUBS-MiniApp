@@ -3,10 +3,12 @@
 import Link from 'next/link'
 import Button from '@/components/Button'
 import Card from '@/components/Card'
-import { useState } from 'react'
+import WeeklyNFTRewards from '@/components/WeeklyNFTRewards'
+import { useState, useEffect } from 'react'
 
 export default function Leaderboard() {
   const [timeFrame, setTimeFrame] = useState('all-time')
+  const [weeklyNFTData, setWeeklyNFTData] = useState<any>(null)
 
   const leaderboardData = [
     { rank: 1, name: '@designer_dx', points: 12847, earnings: '42.5 ETH', nfts: 45, emoji: '🥇' },
