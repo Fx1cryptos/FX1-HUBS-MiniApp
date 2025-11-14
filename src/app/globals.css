@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,11 +7,50 @@
 @layer base {
   :root {
     color-scheme: dark;
+    --color-royal-blue: #4169E1;
+    --color-gold: #FFD700;
+    --color-white: #FFFFFF;
+    --color-near-white: #F5F5F5;
+  }
+
+  html {
+    font-family: 'Inter', 'Outfit', 'Poppins', sans-serif;
   }
 
   body {
     @apply font-sans;
-    background-color: #000;
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 50%, #F0F0F0 100%);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+
+    /* Subtle 3D depth with gradients */
+    box-shadow: inset 0 0 100px rgba(65, 105, 225, 0.08);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(65, 105, 225, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(65, 105, 225, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  * {
+    position: relative;
+    z-index: 2;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Poppins', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 }
 
