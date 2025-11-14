@@ -10,10 +10,24 @@ export default function Leaderboard() {
   const [timeFrame, setTimeFrame] = useState('all-time')
   const [weeklyNFTData, setWeeklyNFTData] = useState<any>(null)
 
+  useEffect(() => {
+    // Fetch weekly NFT rewards data
+    const fetchWeeklyRewards = async () => {
+      try {
+        // Get top 3 creators for weekly NFT rewards
+        const topThree = leaderboardData.slice(0, 3)
+        setWeeklyNFTData(topThree)
+      } catch (error) {
+        console.error('Error fetching weekly rewards:', error)
+      }
+    }
+    fetchWeeklyRewards()
+  }, [])
+
   const leaderboardData = [
-    { rank: 1, name: '@designer_dx', points: 12847, earnings: '42.5 ETH', nfts: 45, emoji: '🥇' },
-    { rank: 2, name: '@artist_web3', points: 9542, earnings: '31.2 ETH', nfts: 38, emoji: '🥈' },
-    { rank: 3, name: '@creator_labs', points: 7321, earnings: '24.8 ETH', nfts: 32, emoji: '🥉' },
+    { rank: 1, name: '@designer_dx', points: 12847, earnings: '42.5 ETH', nfts: 45, emoji: '🥇', weeklyNFT: 'Golden Crown Hoodie #001' },
+    { rank: 2, name: '@artist_web3', points: 9542, earnings: '31.2 ETH', nfts: 38, emoji: '🥈', weeklyNFT: 'Silver Edition Jacket #042' },
+    { rank: 3, name: '@creator_labs', points: 7321, earnings: '24.8 ETH', nfts: 32, emoji: '🥉', weeklyNFT: 'Bronze Sneakers #128' },
     { rank: 4, name: '@fashion_mint', points: 6145, earnings: '18.5 ETH', nfts: 28, emoji: '⭐' },
     { rank: 5, name: '@nft_visionary', points: 5032, earnings: '15.3 ETH', nfts: 22, emoji: '⭐' },
     { rank: 6, name: '@creative_soul', points: 4521, earnings: '13.7 ETH', nfts: 19, emoji: '⭐' },
