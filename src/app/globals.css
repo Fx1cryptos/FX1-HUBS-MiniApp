@@ -55,10 +55,175 @@
 }
 
 @layer components {
+  /* 3D Card Effects */
+  .card-3d {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.9) 100%);
+    border: 1px solid rgba(65, 105, 225, 0.2);
+    border-radius: 16px;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(65, 105, 225, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transform: translateZ(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(65, 105, 225, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-8px) translateZ(0);
+    box-shadow:
+      0 20px 40px rgba(65, 105, 225, 0.15),
+      0 0 0 1px rgba(65, 105, 225, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .card-3d:hover::before {
+    opacity: 1;
+  }
+
+  /* 3D Button Effects */
+  .btn-3d {
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transform: translateZ(0);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 4px 15px rgba(65, 105, 225, 0.3),
+      0 0 0 1px rgba(65, 105, 225, 0.2);
+  }
+
+  .btn-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .btn-3d:hover {
+    transform: translateY(-4px) translateZ(0);
+    box-shadow:
+      0 8px 25px rgba(65, 105, 225, 0.4),
+      0 0 0 1px rgba(65, 105, 225, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .btn-3d:hover::before {
+    opacity: 1;
+  }
+
+  .btn-3d:active {
+    transform: translateY(-2px) translateZ(0);
+    box-shadow:
+      0 4px 12px rgba(65, 105, 225, 0.25),
+      0 0 0 1px rgba(65, 105, 225, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  /* Primary Button */
+  .btn-3d-primary {
+    @apply btn-3d;
+    background: linear-gradient(135deg, #4169E1 0%, #3458C4 100%);
+    color: white;
+    font-weight: 700;
+  }
+
+  .btn-3d-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Secondary Button */
+  .btn-3d-secondary {
+    @apply btn-3d;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.85) 100%);
+    color: #4169E1;
+    border: 2px solid #4169E1;
+    font-weight: 700;
+  }
+
+  /* 3D Hero Section */
+  .hero-3d {
+    perspective: 1000px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-3d-content {
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateZ(0);
+    }
+    50% {
+      transform: translateY(-10px) translateZ(20px);
+    }
+  }
+
+  /* Glowing accent shapes */
+  .glow-accent {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(65, 105, 225, 0.4) 0%, transparent 70%);
+    filter: blur(40px);
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+  }
+
+  /* 3D Text Shadow */
+  .text-3d {
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.1),
+      -1px -1px 0 rgba(255, 255, 255, 0.5);
+  }
+
   .page-root {
-    @apply bg-black text-white;
-    background-image: radial-gradient(circle at top, rgba(46, 139, 255, 0.2), transparent 55%),
-      radial-gradient(circle at bottom, rgba(168, 85, 247, 0.18), transparent 65%);
+    @apply bg-white text-gray-900;
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 50%, #F0F0F0 100%);
+    background-attachment: fixed;
     transition: background-color 0.4s ease;
   }
 
