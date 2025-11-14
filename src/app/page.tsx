@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import Button from '@/components/Button'
 import Card from '@/components/Card'
+import MiniAppPanel from '@/components/MiniAppPanel'
+import WeeklyNFTRewards from '@/components/WeeklyNFTRewards'
 
 interface Feature {
   icon: string
