@@ -1,0 +1,28 @@
+{
+  "name": "FX1 Digital Hubs",
+  "slug": "fx1-digital-hubs",
+  "description": "FX1 Digital Hubs — MiniApp powered by $fx1_hubs and $FDH utility tokens.",
+  "version": "1.1.0",
+  "baseBuilder": {
+    "ownerAddress": "0x5f188E67C374feF892Cc3BaC4aE0689166C6a620"
+  },
+  "tokens": {
+    "primaryUtility": {
+      "symbol": "fx1_hubs",
+      "type": "ZORA_CREATOR_COIN",
+      "contract": "0x24c42adfb620f3835fcb31fbdf3c1773fac76970"
+    },
+    "premiumReward": {
+      "symbol": "FDH",
+      "type": "ERC20",
+      "chain": "base",
+      "contract": "0x1f85705d939bb6fa1aebe99d7105adcee75ce380"
+    }
+  },
+  "permissions": ["identity", "storage", "network"],
+  "entry": "/_miniapp/frame.html",
+  "allowedOrigins": [
+    "https://fx1cryptos.github.io",
+    "https://*.vercel.app"
+  ]
+}
