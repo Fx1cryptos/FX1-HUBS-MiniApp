@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="px-3 py-2 text-xs uppercase tracking-[0.3em] text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+              className="px-3 py-2 text-xs uppercase tracking-[0.3em] text-white/70 hover:text-[#FFD700] hover:bg-[#4169E1]/10 rounded-lg transition-colors duration-300"
             >
               {item.label}
             </Link>
