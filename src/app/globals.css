@@ -197,52 +197,116 @@
     color: #4169E1;
   }
 
-  /* 3D Hero Section */
+  /* Luxury Hero Section */
   .hero-3d {
-    perspective: 1000px;
+    perspective: 1200px;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-3d-content {
     transform-style: preserve-3d;
-    animation: float 6s ease-in-out infinite;
+    animation: float-luxury 6s ease-in-out infinite;
+    z-index: 10;
   }
 
-  @keyframes float {
+  @keyframes float-luxury {
     0%, 100% {
       transform: translateY(0px) translateZ(0);
     }
     50% {
-      transform: translateY(-10px) translateZ(20px);
+      transform: translateY(-20px) translateZ(30px);
     }
   }
 
-  /* Glowing accent shapes */
+  /* Luxury Glowing accent shapes */
   .glow-accent {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(65, 105, 225, 0.4) 0%, transparent 70%);
-    filter: blur(40px);
-    animation: glow-pulse 4s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: glow-pulse-luxury 5s ease-in-out infinite;
   }
 
-  @keyframes glow-pulse {
+  @keyframes glow-pulse-luxury {
     0%, 100% {
-      opacity: 0.5;
+      opacity: 0.4;
       transform: scale(1);
     }
     50% {
-      opacity: 0.8;
-      transform: scale(1.2);
+      opacity: 0.7;
+      transform: scale(1.3);
     }
   }
 
-  /* 3D Text Shadow */
+  /* Luxury 3D Text Shadow */
   .text-3d {
     text-shadow:
-      2px 2px 4px rgba(0, 0, 0, 0.1),
-      -1px -1px 0 rgba(255, 255, 255, 0.5);
+      3px 3px 6px rgba(0, 0, 0, 0.3),
+      -2px -2px 4px rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+  }
+
+  /* Luxury Hero Title */
+  .hero-title-luxury {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  /* Luxury Section Title */
+  .section-title-luxury {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  /* Luxury Feature Card */
+  .feature-card-luxury {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 215, 0, 0.03) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card-luxury::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .feature-card-luxury:hover {
+    transform: translateY(-16px);
+    border-color: rgba(255, 215, 0, 0.35);
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+  }
+
+  .feature-card-luxury:hover::before {
+    opacity: 1;
   }
 
   .page-root {
