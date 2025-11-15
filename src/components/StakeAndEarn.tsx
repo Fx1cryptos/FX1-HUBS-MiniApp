@@ -325,10 +325,10 @@ const StakeAndEarn = () => {
             display: 'inline-block',
             width: '100%',
             maxWidth: '400px',
-            padding: '18px 32px',
+            padding: 'clamp(12px 24px, 4vw 6vw, 18px 32px)',
             background: '#FFD700',
             color: '#0504AA',
-            fontSize: '18px',
+            fontSize: 'clamp(14px, 3vw, 18px)',
             fontWeight: 700,
             border: 'none',
             borderRadius: '50px',
@@ -336,7 +336,8 @@ const StakeAndEarn = () => {
             textDecoration: 'none',
             transition: 'all 0.3s ease',
             fontFamily: 'Montserrat, sans-serif',
-            marginBottom: '16px',
+            marginBottom: '12px',
+            margin: '0 auto 12px',
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)'
@@ -356,16 +357,17 @@ const StakeAndEarn = () => {
             display: 'inline-block',
             width: '100%',
             maxWidth: '400px',
-            padding: '16px 32px',
+            padding: 'clamp(12px 24px, 3vw 6vw, 16px 32px)',
             background: 'transparent',
             color: '#FFD700',
-            fontSize: '16px',
+            fontSize: 'clamp(12px, 3vw, 16px)',
             fontWeight: 700,
             border: '2px solid #FFD700',
             borderRadius: '50px',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
             fontFamily: 'Montserrat, sans-serif',
+            margin: '0 auto',
           }}
           onClick={() => window.open('https://flaunch.gg/base/group/0x50ec14dc217daae2f7f3fc4c86836e0f3a52dde4', '_blank')}
           onMouseEnter={(e) => {
