@@ -8,9 +8,8 @@ const navigationLinks = [
   { href: '/', label: 'Home' },
   { href: '/studio', label: 'Studio' },
   { href: '/mint', label: 'Mint' },
-  { href: '/feed', label: 'Feed' },
-  { href: '/dashboard', label: 'Dashboard' },
   { href: '/wardrobe', label: 'Wardrobe' },
+  { href: '/leaderboard', label: 'Leaderboard' },
   { href: '/token-utilities', label: 'Tokens' },
   { href: '/connect', label: 'Connect' },
 ]
@@ -19,28 +18,28 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 card-3d mx-2 mt-2 rounded-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 page-header">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-6 py-3 md:py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
-          <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white text-lg transform group-hover:scale-110 transition-transform">
-            🎨
+        <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity group">
+          <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFC700] flex items-center justify-center font-bold text-[#4169E1] text-lg md:text-xl transform group-hover:scale-110 transition-transform">
+            💎
           </div>
-          <div>
-            <div className="text-sm font-bold uppercase tracking-wider text-gray-900 text-3d">
+          <div className="hidden sm:block">
+            <div className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#FFD700] font-serif">
               FX1 Digital Hubs
             </div>
-            <div className="text-xs text-blue-600 font-semibold">On Base • Zora • Farcaster</div>
+            <div className="text-[10px] md:text-xs text-[#FFD700]/70 font-medium">On Base • Zora • Farcaster</div>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-2">
           {navigationLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="px-3 py-2 text-xs uppercase tracking-[0.3em] font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-300"
+              className="nav-link px-4 py-2 text-xs uppercase tracking-wider"
             >
               {item.label}
             </Link>
@@ -55,7 +54,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden p-2 hover:bg-blue-50 rounded-lg transition-colors"
+          className="lg:hidden p-2 text-[#FFD700] hover:bg-[#FFD700]/10 rounded-lg transition-colors"
         >
           <span className="text-2xl">☰</span>
         </button>
@@ -63,19 +62,22 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-blue-100 p-4 bg-white/50">
+        <div className="lg:hidden border-t border-[#FFD700]/10 p-4 bg-gradient-to-b from-[#4169E1]/20 to-[#2E4C8F]/20">
           <nav className="flex flex-col gap-2 mb-4">
             {navigationLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="nav-link px-4 py-2 text-sm font-medium text-[#FFD700]"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
-          <WalletConnectPanel />
+          <div className="border-t border-[#FFD700]/10 pt-4">
+            <WalletConnectPanel />
+          </div>
         </div>
       )}
     </header>
