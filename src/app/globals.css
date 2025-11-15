@@ -310,30 +310,37 @@
   }
 
   .page-root {
-    @apply bg-white text-gray-900;
-    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 50%, #F0F0F0 100%);
+    background: linear-gradient(135deg, #4169E1 0%, #2E4C8F 50%, #4169E1 100%);
     background-attachment: fixed;
+    color: #FFFFFF;
     transition: background-color 0.4s ease;
   }
 
   .page-header {
-    @apply sticky top-0 border-b border-white/10 backdrop-blur-md;
-    background-color: rgba(0, 0, 0, 0.8);
+    @apply sticky top-0 border-b backdrop-blur-md z-50;
+    border-color: rgba(255, 215, 0, 0.1);
+    background-color: rgba(65, 105, 225, 0.85);
   }
 
   .logo-emblem {
-    @apply rounded-md text-white uppercase tracking-[0.25em] shadow-lg;
-    background: linear-gradient(135deg, #2563eb 0%, #22d3ee 45%, #8b5cf6 100%);
-    transform: rotate(-12deg);
+    @apply rounded-full text-white uppercase tracking-[0.1em] shadow-lg;
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+    color: #4169E1;
+    font-weight: 800;
+    padding: 0.5rem 1rem;
   }
 
   .nav-link {
-    @apply rounded px-3 py-2 transition-colors duration-200;
+    @apply rounded-full px-4 py-2 transition-all duration-300;
     background-color: transparent;
+    color: #FFFFFF;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
   }
 
   .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
   }
 
   .parallax-scene {
