@@ -29,11 +29,16 @@ const LuxuryLandingPage = () => {
 
         <div className="hero-3d-content text-center px-4 md:px-6 max-w-5xl mx-auto z-10">
           {/* Logo */}
-          <div className="mb-8 inline-block">
-            <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#FFD700] via-[#4169E1] to-[#FFD700] p-1 shadow-2xl animate-pulse">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#4169E1] to-[#2E4C8F] flex items-center justify-center">
-                <span className="text-3xl md:text-4xl">💎</span>
-              </div>
+          <div className="mb-8 inline-block animate-fade-in">
+            <div className="w-28 h-28 md:w-40 md:h-40 mx-auto mb-6 rounded-full shadow-2xl overflow-hidden">
+              <Image
+                src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2Fb2e8c1d7a7fa45fda204a2f41c3adae6?format=webp&width=800"
+                alt="FX1 Digital Hubs Logo"
+                width={200}
+                height={200}
+                priority
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
