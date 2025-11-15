@@ -168,6 +168,9 @@ const LuxuryLandingPage = () => {
         </div>
       </section>
 
+      {/* Stake & Earn Section */}
+      <StakeAndEarn />
+
       {/* Farcaster Integration Section */}
       <section className="py-20 md:py-32 px-4 md:px-6 relative">
         <div className="max-w-5xl mx-auto">
