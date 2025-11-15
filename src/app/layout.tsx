@@ -1,10 +1,9 @@
 import './globals.css'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'FX1 Digital Hubs',
-  description: 'Onchain Fashion, AI & Web3 Innovation Hub',
+  description: 'Web3 Digital Wardrobe & Creator Hub on Base',
 }
 
 export default function RootLayout({
@@ -14,10 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className="page-root text-white m-0 p-0">
         <Navbar />
-        <main className="min-h-screen px-6 py-8">{children}</main>
-        <Footer />
+        <main className="min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   )
