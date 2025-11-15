@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { getPoolStats, getUserStake, calculateEarnings } from '@/lib/flaunch-api'
 
 interface PoolStats {
   totalStaked: string
@@ -15,30 +16,27 @@ const StakeAndEarn = () => {
     totalStaked: '$1.2M',
     avgAPY: '42%',
     holders: '1,500+',
-    loading: false,
+    loading: true,
   })
 
   const [walletConnected, setWalletConnected] = useState(false)
   const [userStake, setUserStake] = useState('0')
+  const [monthlyEarnings, setMonthlyEarnings] = useState('0')
 
   useEffect(() => {
-    // Fetch real pool data from Flaunch API (placeholder)
+    // Fetch real pool data from Flaunch API
     const fetchPoolStats = async () => {
       try {
-        // In production, replace with actual Flaunch API call:
-        // const response = await fetch('https://api.flaunch.gg/pool/0x50ec14dc217daae2f7f3fc4c86836e0f3a52dde4')
-        // const data = await response.json()
-        // setStats({ totalStaked: data.tvl, avgAPY: data.apy, holders: data.holders })
-        
-        // For now using placeholder
+        const poolData = await getPoolStats()
         setStats({
-          totalStaked: '$1.2M',
-          avgAPY: '42%',
-          holders: '1,500+',
+          totalStaked: poolData.totalStaked,
+          avgAPY: poolData.avgAPY,
+          holders: poolData.holders,
           loading: false,
         })
       } catch (error) {
         console.error('Failed to fetch pool stats:', error)
+        setStats(prev => ({ ...prev, loading: false }))
       }
     }
 
