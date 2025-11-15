@@ -90,9 +90,9 @@ const StakeAndEarn = () => {
   ]
 
   return (
-    <section style={{ 
+    <section style={{
       background: 'linear-gradient(180deg, rgba(5,4,170,0) 0%, rgba(5,4,170,0.8) 80%, #0504AA 100%)',
-      padding: '80px 24px',
+      padding: 'clamp(40px, 8vw, 80px) 20px',
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden',
