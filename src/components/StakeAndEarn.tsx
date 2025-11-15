@@ -44,13 +44,30 @@ const StakeAndEarn = () => {
   }, [])
 
   const handleWalletConnect = async () => {
-    // Placeholder for Web3Modal/RainbowKit integration
-    // In production, implement actual wallet connection logic
-    setWalletConnected(!walletConnected)
-    if (!walletConnected) {
-      setUserStake('2.5')
+    // Toggle wallet connection
+    const newConnectionState = !walletConnected
+    setWalletConnected(newConnectionState)
+
+    if (newConnectionState) {
+      try {
+        // In production: use actual wallet connection (Web3Modal, RainbowKit)
+        // const { address } = await connectWallet()
+        // const stake = await getUserStake(address)
+
+        // Placeholder simulation
+        const stake = 2.5
+        const apy = 42
+        const earnings = calculateEarnings(stake, apy, 30)
+
+        setUserStake(stake.toString())
+        setMonthlyEarnings(earnings.toFixed(2))
+      } catch (error) {
+        console.error('Failed to fetch user stake:', error)
+        setWalletConnected(false)
+      }
     } else {
       setUserStake('0')
+      setMonthlyEarnings('0')
     }
   }
 
