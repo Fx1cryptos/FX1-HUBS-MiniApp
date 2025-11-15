@@ -124,23 +124,25 @@ const StakeAndEarn = () => {
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         {/* Headline */}
         <h2 style={{
-          fontSize: 'clamp(28px, 5vw, 42px)',
+          fontSize: 'clamp(24px, 6vw, 42px)',
           fontWeight: 900,
           color: '#FFD700',
-          margin: '0 0 16px',
+          margin: '0 0 12px',
           fontFamily: 'Montserrat, sans-serif',
           letterSpacing: '-0.02em',
+          lineHeight: '1.2',
         }}>
           Stake in FX1 Launch Group – Earn $FDH Rewards
         </h2>
 
         {/* Subheadline */}
         <h3 style={{
-          fontSize: '20px',
+          fontSize: 'clamp(16px, 4vw, 20px)',
           fontWeight: 700,
           color: '#FFFFFF',
-          margin: '0 0 24px',
+          margin: '0 0 20px',
           fontFamily: 'Montserrat, sans-serif',
+          lineHeight: '1.3',
         }}>
           Join our Flaunch Group Pool to stake LP tokens from top Base coins and earn exclusive yields. Holders get priority access!
         </h3>
