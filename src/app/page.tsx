@@ -116,7 +116,14 @@ const LuxuryLandingPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1: NFT Fashion Minting */}
             <div className="feature-card-luxury group">
-              <div className="text-5xl md:text-6xl mb-6">👗</div>
+              <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                <Image
+                  src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2F39c81602bd434a9e905c1fec8ad81cfd?format=webp&width=800"
+                  alt="Pixelated Fashion NFTs"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">NFT Fashion Minting</h3>
               <p className="text-white/80 mb-6 leading-relaxed">
                 Mint exclusive FID NFT Fashion Art wearables with ETH on Base. Personalize with your Farcaster profile picture.
@@ -128,7 +135,7 @@ const LuxuryLandingPage = () => {
 
             {/* Feature 2: Creator Community Hub */}
             <div className="feature-card-luxury group">
-              <div className="text-5xl md:text-6xl mb-6">🌐</div>
+              <div className="text-5xl md:text-6xl mb-6 flex items-center justify-center h-40">🌐</div>
               <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">Creator Community Hub</h3>
               <p className="text-white/80 mb-6 leading-relaxed">
                 Build and connect using $FX1_HUBS utility token for governance, staking, and exclusive drops.
@@ -140,7 +147,14 @@ const LuxuryLandingPage = () => {
 
             {/* Feature 3: Social Tasks & Rewards */}
             <div className="feature-card-luxury group">
-              <div className="text-5xl md:text-6xl mb-6">✅</div>
+              <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                <Image
+                  src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2F5b38c030bd7a4edda873f477af182f3f?format=webp&width=800"
+                  alt="Wear to Earn"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">Social Tasks & Rewards</h3>
               <p className="text-white/80 mb-6 leading-relaxed">
                 Earn $FX1_HUBS by completing tasks: Share on Farcaster, refer friends, or curate fashion drops.
