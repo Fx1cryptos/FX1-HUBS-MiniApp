@@ -309,7 +309,7 @@ const StakeAndEarn = () => {
               Your Position: <span style={{ color: '#FFD700', fontSize: '18px', fontWeight: 700 }}>{userStake} $FDH</span>
             </p>
             <p style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>
-              Potential Monthly Earnings: <span style={{ color: '#FFD700', fontSize: '16px', fontWeight: 700 }}>~${(parseFloat(userStake) * 42 / 12).toFixed(2)}</span>
+              Potential Monthly Earnings: <span style={{ color: '#FFD700', fontSize: '16px', fontWeight: 700 }}>~${monthlyEarnings}</span>
             </p>
           </div>
         )}
