@@ -2,360 +2,215 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
-import Button from '@/components/Button'
-import Card from '@/components/Card'
-import MiniAppPanel from '@/components/MiniAppPanel'
-import WeeklyNFTRewards from '@/components/WeeklyNFTRewards'
+import Image from 'next/image'
 
-interface Feature {
-  icon: string
-  title: string
-  description: string
-  link: string
-  label: string
-}
-
-const features: Feature[] = [
-  {
-    icon: '🎨',
-    title: 'AI Studio',
-    description: 'Generate stunning NFT art with AI in any style',
-    link: '/studio',
-    label: 'Create Art',
-  },
-  {
-    icon: '🪙',
-    title: 'Mint NFTs',
-    description: 'Launch your creations on Base and Zora chains',
-    link: '/mint',
-    label: 'Start Minting',
-  },
-  {
-    icon: '📱',
-    title: 'Social Feed',
-    description: 'Share, engage, and earn $FDH tips',
-    link: '/feed',
-    label: 'Join Feed',
-  },
-  {
-    icon: '📊',
-    title: 'Dashboard',
-    description: 'Track your NFTs, earnings, and analytics',
-    link: '/dashboard',
-    label: 'My Dashboard',
-  },
-  {
-    icon: '💰',
-    title: '$FDH Token',
-    description: 'Earn rewards through staking and tips',
-    link: '/token',
-    label: 'Explore Token',
-  },
-  {
-    icon: '👥',
-    title: 'Creator Profile',
-    description: 'Build your onchain portfolio',
-    link: '/profile/your-username',
-    label: 'Create Profile',
-  },
-]
-
-const stats = [
-  { value: '5,847', label: 'Creators' },
-  { value: '42,000+', label: 'NFTs Minted' },
-  { value: '$12.5M', label: 'Market Cap' },
-  { value: '100M', label: '$FDH Total' },
-]
-
-const wardrobeItems = [
-  { name: 'Hoodies', emoji: '👕', description: 'Premium digital hoodies' },
-  { name: 'Sneakers', emoji: '👟', description: 'Rare 3D sneakers' },
-  { name: 'Jackets', emoji: '🧥', description: 'Limited edition jackets' },
-  { name: 'Digital Fits', emoji: '✨', description: 'Complete outfit sets' },
-  { name: '3D Wearables', emoji: '🎯', description: 'Metaverse avatars' },
-  { name: 'Accessories', emoji: '🪙', description: 'Premium accessories' },
-]
-
-const tokenUtilities = [
-  {
-    symbol: '$fx1_hubs',
-    name: 'Zora Creator Coin',
-    features: ['Premium wardrobe access', 'Boosted rankings', 'Special edition fashion mints', 'Creator monetization'],
-  },
-  {
-    symbol: '$FDH',
-    name: 'Base Token',
-    features: ['Minting & upgrading wearables', 'Early access drops', 'In-app purchase power', 'Seasonal rewards'],
-  },
-]
-
-export default function Home() {
+const LuxuryLandingPage = () => {
   useEffect(() => {
     // Initialize Farcaster MiniApp SDK
     const initializeSdk = async () => {
       try {
         const { sdk } = await import('@farcaster/miniapp-sdk')
         await sdk.actions.ready()
-        console.log('Farcaster MiniApp SDK initialized successfully')
+        console.log('Farcaster MiniApp SDK initialized')
       } catch (error) {
-        console.log('Running outside Farcaster environment or SDK not available')
+        console.log('Running outside Farcaster environment')
       }
     }
     initializeSdk()
   }, [])
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <main className="mx-auto max-w-7xl px-6 py-12">
-        {/* Hero Section */}
-        <section className="mb-20 text-center py-12">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-widest mb-6">
-              <span className="bg-gradient-to-r from-[#4169E1] via-[#FFD700] to-[#4169E1] bg-clip-text text-transparent">
-                FX1 Digital Hubs
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-4">
-              Your Web3 Digital Wardrobe & Creator Hub on Base
-            </p>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Create onchain fashion, mint NFT wearables, and connect with the creator community using $fx1_hubs and $FDH tokens
-            </p>
+    <div className="page-root min-h-screen overflow-hidden">
+      {/* Hero Section */}
+      <section className="hero-3d relative">
+        {/* Floating accent shapes */}
+        <div className="glow-accent absolute top-20 left-10 w-96 h-96"></div>
+        <div className="glow-accent absolute bottom-20 right-10 w-80 h-80 animation-delay-2000"></div>
+
+        <div className="hero-3d-content text-center px-4 md:px-6 max-w-5xl mx-auto z-10">
+          {/* Logo */}
+          <div className="mb-8 inline-block">
+            <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#FFD700] via-[#4169E1] to-[#FFD700] p-1 shadow-2xl animate-pulse">
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#4169E1] to-[#2E4C8F] flex items-center justify-center">
+                <span className="text-3xl md:text-4xl">💎</span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          {/* Main Headline */}
+          <h1 className="hero-title-luxury mb-6">
+            FX1 Digital Hubs
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-xl md:text-2xl text-white/90 mb-6 font-light leading-relaxed">
+            Your Web3 Digital Wardrobe & Creator Hub on Base
+          </p>
+
+          {/* Description */}
+          <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+            Create on-chain fashion, mint NFT wearables, and connect with creators using $FX1_HUBS & $FDH tokens. Powered by Zora, Farcaster, and Base.
+          </p>
+
+          {/* Tagline */}
+          <div className="flex items-center justify-center gap-4 mb-12 text-[#FFD700] font-semibold text-sm md:text-base tracking-widest">
+            <span>⚡ On Base</span>
+            <span className="text-white/30">•</span>
+            <span>🎨 Zora</span>
+            <span className="text-white/30">•</span>
+            <span>📱 Farcaster</span>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col md:flex-row gap-4 justify-center mb-12">
             <Link href="/studio">
-              <Button size="lg" className="bg-gradient-to-r from-[#4169E1] to-[#FFD700] hover:from-[#4169E1]/90 hover:to-[#FFD700]/90">
+              <button className="btn-3d-primary px-8 py-4 text-lg md:text-xl whitespace-nowrap">
                 🚀 Launch Mini App
-              </Button>
+              </button>
             </Link>
             <Link href="/mint">
-              <Button size="lg" className="bg-gradient-to-r from-[#FFD700] to-[#4169E1] hover:from-[#FFD700]/90 hover:to-[#4169E1]/90">
-                👗 Mint Onchain Fashion
-              </Button>
+              <button className="btn-3d px-8 py-4 text-lg md:text-xl whitespace-nowrap">
+                👗 Mint On-Chain Fashion
+              </button>
             </Link>
             <Link href="/token">
-              <Button variant="outline" size="lg">
-                💰 Buy $fx1_hubs Coin
-              </Button>
-            </Link>
-            <Link href="/studio">
-              <Button variant="outline" size="lg">
-                👔 Explore Wardrobe
-              </Button>
+              <button className="btn-3d-secondary px-8 py-4 text-lg md:text-xl whitespace-nowrap">
+                💰 Buy $FX1_HUBS Coin
+              </button>
             </Link>
           </div>
 
-          {/* Stats */}
+          {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {stats.map((stat, i) => (
-              <div key={i} className="p-4 rounded-2xl border border-[#4169E1]/30 bg-[#4169E1]/5 backdrop-blur">
-                <p className="text-2xl md:text-3xl font-bold text-[#FFD700]">{stat.value}</p>
-                <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* About Section */}
-        <section className="mb-20 p-8 rounded-3xl border border-[#4169E1]/30 bg-gradient-to-r from-[#4169E1]/10 to-[#FFD700]/5 backdrop-blur">
-          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-            About FX1 Digital Hubs
-          </h2>
-          <p className="text-lg text-white/80 max-w-3xl">
-            FX1 Digital Hubs is a Web3 Digital Wardrobe, NFT Fashion Lab, and Creator Hub built on Base. Powered by <span className="text-[#FFD700] font-bold">$FDH token</span> and the <span className="text-[#4169E1] font-bold">Zora creator coin $fx1_hubs</span>, we empower creators to design, mint, and monetize digital wearables while building a vibrant onchain fashion community.
-          </p>
-        </section>
-
-        {/* Token Utilities Section */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-              Token Utilities
-            </h2>
-            <p className="text-white/70">Two powerful tokens driving the FX1 ecosystem</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {tokenUtilities.map((token, i) => (
-              <Card key={i} className="border-[#4169E1]/50 bg-gradient-to-br from-[#4169E1]/15 to-[#FFD700]/5">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="text-4xl">
-                    {token.symbol === '$fx1_hubs' ? '🎁' : '💎'}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#FFD700]">{token.symbol}</h3>
-                    <p className="text-sm text-white/70">{token.name}</p>
-                  </div>
-                </div>
-                <ul className="space-y-2">
-                  {token.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-white/80">
-                      <span className="text-[#FFD700]">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/token-utilities" className="mt-6 block">
-                  <Button variant="outline" size="sm" className="w-full border-[#FFD700] hover:bg-[#FFD700]/10">
-                    Learn More
-                  </Button>
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Digital Wardrobe Section */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-              FX1 Digital Wardrobe
-            </h2>
-            <p className="text-white/70">Onchain clothes, minted and monetized</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-            {wardrobeItems.map((item, i) => (
-              <Card key={i} className="border-[#4169E1]/30 bg-black/60 hover:border-[#FFD700] transition-all duration-300">
-                <div className="text-5xl mb-4 text-center">{item.emoji}</div>
-                <h3 className="text-lg font-bold text-[#FFD700] mb-2 text-center">{item.name}</h3>
-                <p className="text-sm text-white/70 text-center">{item.description}</p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/mint" className="w-full">
-              <Button size="lg" className="w-full bg-gradient-to-r from-[#4169E1] to-[#FFD700] hover:from-[#4169E1]/90 hover:to-[#FFD700]/90">
-                👗 Mint Wearables
-              </Button>
-            </Link>
-            <Link href="/wardrobe" className="w-full">
-              <Button size="lg" variant="outline" className="w-full border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10">
-                👔 View Collection
-              </Button>
-            </Link>
-            <Link href="/mint" className="w-full">
-              <Button size="lg" variant="outline" className="w-full border-[#4169E1] text-[#4169E1] hover:bg-[#4169E1]/10">
-                🎁 Claim Free Fit
-              </Button>
-            </Link>
-          </div>
-        </section>
-
-        {/* Creator Zone Section */}
-        <section className="mb-20 p-8 rounded-3xl border border-[#FFD700]/30 bg-gradient-to-r from-[#FFD700]/10 to-[#4169E1]/5 backdrop-blur">
-          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-            Creator Zone
-          </h2>
-          <p className="text-lg text-white/80 mb-6">
-            Creators can redeem <span className="text-[#FFD700] font-bold">$fx1_hubs coins</span> for boosts, minting power, or exposure inside the mini app. Earn rewards through community engagement and exclusive drops.
-          </p>
-          <Link href="/ecosystem">
-            <Button size="lg" className="bg-gradient-to-r from-[#FFD700] to-[#4169E1] hover:from-[#FFD700]/90 hover:to-[#4169E1]/90">
-              🚀 Become a Creator
-            </Button>
-          </Link>
-        </section>
-
-        {/* Features Grid */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-              Core Features
-            </h2>
-            <p className="text-white/70">Everything you need to create, mint, and connect in Web3</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, i) => (
-              <Link key={i} href={feature.link}>
-                <Card className="group hover:border-[#FFD700]/50 h-full cursor-pointer transition-all duration-300 border-[#4169E1]/30">
-                  <div className="flex flex-col h-full">
-                    <div className="text-5xl mb-4">{feature.icon}</div>
-                    <h3 className="text-xl font-bold uppercase tracking-wider mb-3 text-[#FFD700]">{feature.title}</h3>
-                    <p className="text-white/70 flex-grow mb-6">{feature.description}</p>
-                    <Button variant="outline" size="sm" className="w-full border-[#4169E1] text-[#4169E1] hover:bg-[#4169E1]/10">
-                      {feature.label}
-                    </Button>
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Leaderboard Preview */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-              Leaderboard
-            </h2>
-            <p className="text-white/70">Top creators by $fx1_hubs Coin Points</p>
-          </div>
-
-          <Card className="border-[#4169E1]/50 bg-black/70">
-            <div className="space-y-4">
-              {[
-                { rank: 1, name: '@designer_dx', points: '12,847', emoji: '🥇' },
-                { rank: 2, name: '@artist_web3', points: '9,542', emoji: '🥈' },
-                { rank: 3, name: '@creator_labs', points: '7,321', emoji: '🥉' },
-                { rank: 4, name: '@fashion_mint', points: '6,145', emoji: '⭐' },
-                { rank: 5, name: '@nft_visionary', points: '5,032', emoji: '⭐' },
-              ].map((user, i) => (
-                <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-[#4169E1]/20 bg-[#4169E1]/5 hover:bg-[#4169E1]/10 transition-all duration-300">
-                  <div className="flex items-center gap-4 flex-grow">
-                    <span className="text-2xl">{user.emoji}</span>
-                    <div>
-                      <p className="font-bold text-[#FFD700]">#{user.rank}</p>
-                      <p className="text-white/80">{user.name}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xl font-bold text-[#FFD700]">{user.points}</p>
-                    <p className="text-xs text-white/60">$fx1_hubs Points</p>
-                  </div>
-                </div>
-              ))}
+            <div className="card-3d p-4">
+              <p className="text-2xl md:text-3xl font-bold text-[#FFD700]">5,847</p>
+              <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">Creators</p>
             </div>
-            <Link href="/leaderboard" className="mt-6 block">
-              <Button variant="outline" size="lg" className="w-full border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10">
-                View Full Leaderboard
-              </Button>
-            </Link>
-          </Card>
-        </section>
-
-        {/* Mini App Verification */}
-        <section className="mb-20 p-8 rounded-3xl border border-[#4169E1]/50 bg-gradient-to-r from-[#4169E1]/20 to-[#FFD700]/10 backdrop-blur text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-3xl">✅</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#FFD700]">Verified Base Mini App</h2>
+            <div className="card-3d p-4">
+              <p className="text-2xl md:text-3xl font-bold text-[#FFD700]">42,000+</p>
+              <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">NFTs Minted</p>
+            </div>
+            <div className="card-3d p-4">
+              <p className="text-2xl md:text-3xl font-bold text-[#FFD700]">$12.5M</p>
+              <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">Market Cap</p>
+            </div>
+            <div className="card-3d p-4">
+              <p className="text-2xl md:text-3xl font-bold text-[#FFD700]">100M</p>
+              <p className="text-xs md:text-sm text-white/60 uppercase tracking-wider">$FDH Total</p>
+            </div>
           </div>
-          <p className="text-white/80 text-lg">
-            Owned by <span className="font-bold text-[#FFD700]">FX1 Digital Hubs</span>
-          </p>
-          <p className="text-sm text-white/60 mt-2">
-            Base Builder: <code className="bg-black/40 px-3 py-1 rounded text-[#4169E1]">0x5f188E67C374feF892Cc3BaC4aE0689166C6a620</code>
-          </p>
-        </section>
+        </div>
+      </section>
 
-        {/* How It Works */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 text-[#FFD700]">
-              How It Works
-            </h2>
-            <p className="text-white/70">From idea to onchain creation in 4 simple steps</p>
+      {/* Features Section */}
+      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="section-title-luxury mb-4">Core Features</h2>
+          <p className="text-center text-white/70 mb-16 text-lg">Everything you need to create, mint, and connect in Web3</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Feature 1: NFT Fashion Minting */}
+            <div className="feature-card-luxury group">
+              <div className="text-5xl md:text-6xl mb-6">👗</div>
+              <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">NFT Fashion Minting</h3>
+              <p className="text-white/80 mb-6 leading-relaxed">
+                Mint exclusive FID NFT Fashion Art wearables with ETH on Base. Personalize with your Farcaster profile picture.
+              </p>
+              <button className="btn-3d-primary w-full py-3">
+                Start Minting →
+              </button>
+            </div>
+
+            {/* Feature 2: Creator Community Hub */}
+            <div className="feature-card-luxury group">
+              <div className="text-5xl md:text-6xl mb-6">🌐</div>
+              <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">Creator Community Hub</h3>
+              <p className="text-white/80 mb-6 leading-relaxed">
+                Build and connect using $FX1_HUBS utility token for governance, staking, and exclusive drops.
+              </p>
+              <button className="btn-3d-primary w-full py-3">
+                Join Hub →
+              </button>
+            </div>
+
+            {/* Feature 3: Social Tasks & Rewards */}
+            <div className="feature-card-luxury group">
+              <div className="text-5xl md:text-6xl mb-6">✅</div>
+              <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">Social Tasks & Rewards</h3>
+              <p className="text-white/80 mb-6 leading-relaxed">
+                Earn $FX1_HUBS by completing tasks: Share on Farcaster, refer friends, or curate fashion drops.
+              </p>
+              <button className="btn-3d-primary w-full py-3">
+                View Tasks →
+              </button>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Farcaster Integration Section */}
+      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+        <div className="max-w-5xl mx-auto">
+          <div className="card-3d p-8 md:p-12 text-center">
+            <h2 className="section-title-luxury mb-6">Seamless Farcaster Experience</h2>
+            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+              Auto-detect your connected Farcaster wallet, display your profile picture, and mint personalized fashion NFTs using AI assistance.
+            </p>
+
+            <div className="bg-gradient-to-br from-[#4169E1]/20 to-[#FFD700]/10 rounded-2xl p-8 md:p-12 border border-[#FFD700]/20 mb-8">
+              <p className="text-white/70 mb-6">Connect your Farcaster wallet to get started</p>
+              <button className="btn-3d-primary px-8 py-4 text-lg">
+                🔗 Connect Farcaster Wallet
+              </button>
+            </div>
+
+            <div className="text-sm text-white/60">
+              Featured Creators • Live Mints • Trending Fashion
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Utility Token Section */}
+      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+        <div className="max-w-5xl mx-auto">
+          <div className="card-3d p-8 md:p-12">
+            <h2 className="section-title-luxury mb-8">$FX1_HUBS: Power Your Digital Wardrobe</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div className="bg-white/5 rounded-xl p-6 border border-[#FFD700]/10">
+                <p className="text-white/60 text-sm mb-2">Total Supply</p>
+                <p className="text-3xl font-bold text-[#FFD700]">1B</p>
+              </div>
+              <div className="bg-white/5 rounded-xl p-6 border border-[#FFD700]/10">
+                <p className="text-white/60 text-sm mb-2">Market Cap</p>
+                <p className="text-3xl font-bold text-[#FFD700]">Live on DEX</p>
+              </div>
+              <div className="bg-white/5 rounded-xl p-6 border border-[#FFD700]/10">
+                <p className="text-white/60 text-sm mb-2">Holders</p>
+                <p className="text-3xl font-bold text-[#FFD700]">12K+</p>
+              </div>
+            </div>
+
+            <button className="btn-3d-primary px-8 py-4 text-lg mx-auto block">
+              💳 Buy Now on Base DEX
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="section-title-luxury mb-4">How It Works</h2>
+          <p className="text-center text-white/70 mb-16 text-lg">From idea to on-chain creation in 4 simple steps</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 step: '1',
                 title: 'Create with AI',
-                description: 'Use FX1 AI Studio to generate unique digital wearables from prompts',
+                description: 'Generate unique digital wearables from prompts using our AI Studio',
               },
               {
                 step: '2',
@@ -373,127 +228,92 @@ export default function Home() {
                 description: 'Use tokens for boosts, minting power, or exclusive drops',
               },
             ].map((item, i) => (
-              <Card key={i} className="border-[#4169E1]/30 bg-gradient-to-br from-[#4169E1]/10 to-transparent">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="h-10 w-10 rounded-full bg-[#4169E1] flex items-center justify-center font-bold text-white text-lg">
-                    {item.step}
-                  </div>
+              <div key={i} className="feature-card-luxury text-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFC700] flex items-center justify-center font-bold text-[#4169E1] text-xl mb-6 mx-auto">
+                  {item.step}
                 </div>
-                <h3 className="text-lg font-bold uppercase tracking-wider mb-2 text-[#FFD700]">{item.title}</h3>
-                <p className="text-white/70">{item.description}</p>
-              </Card>
+                <h3 className="text-xl font-bold text-[#FFD700] mb-4 font-serif">{item.title}</h3>
+                <p className="text-white/70 leading-relaxed">{item.description}</p>
+              </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Social Links CTA */}
-        <section className="mb-20 p-8 rounded-3xl border border-[#FFD700]/30 bg-gradient-to-r from-[#FFD700]/10 to-[#4169E1]/10 backdrop-blur text-center">
-          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-widest mb-6 text-[#FFD700]">
-            Connect with FX1 Digital Hubs
-          </h2>
-          <p className="text-white/80 mb-8">Join our community across multiple platforms</p>
-          <Link href="/connect">
-            <Button size="lg" className="bg-gradient-to-r from-[#4169E1] to-[#FFD700] hover:from-[#4169E1]/90 hover:to-[#FFD700]/90">
-              🌐 Explore All Links
-            </Button>
-          </Link>
-        </section>
+      {/* CTA Section */}
+      <section className="py-20 md:py-32 px-4 md:px-6 relative">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="card-3d p-8 md:p-12">
+            <h2 className="section-title-luxury mb-6">Ready to Join the Revolution?</h2>
+            <p className="text-white/80 text-lg mb-10">
+              Connect your wallet, mint your first NFT, and become part of the FX1 Digital Hubs community.
+            </p>
 
-        {/* Footer Links */}
-        <section className="border-t border-white/10 pt-12 text-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="flex flex-col md:flex-row gap-4 justify-center">
+              <button className="btn-3d-primary px-8 py-4 text-lg">
+                🚀 Launch Now
+              </button>
+              <button className="btn-3d px-8 py-4 text-lg">
+                📚 Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-[#FFD700]/10 py-12 px-4 md:px-6 mt-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="font-bold uppercase tracking-wider mb-3 text-[#FFD700]">Product</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li>
-                  <Link href="/studio" className="hover:text-[#FFD700] transition">
-                    Studio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/mint" className="hover:text-[#FFD700] transition">
-                    Mint
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/feed" className="hover:text-[#FFD700] transition">
-                    Feed
-                  </Link>
-                </li>
+              <h3 className="font-bold text-[#FFD700] uppercase tracking-wider mb-4 font-serif">Product</h3>
+              <ul className="space-y-2">
+                <li><a href="/studio" className="text-white/70 hover:text-[#FFD700] transition">Studio</a></li>
+                <li><a href="/mint" className="text-white/70 hover:text-[#FFD700] transition">Mint</a></li>
+                <li><a href="/wardrobe" className="text-white/70 hover:text-[#FFD700] transition">Wardrobe</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold uppercase tracking-wider mb-3 text-[#FFD700]">Community</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li>
-                  <Link href="/ecosystem" className="hover:text-[#FFD700] transition">
-                    Ecosystem
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#FFD700] transition">
-                    Discord
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/fx1_hubs" className="hover:text-[#FFD700] transition">
-                    Twitter
-                  </a>
-                </li>
+              <h3 className="font-bold text-[#FFD700] uppercase tracking-wider mb-4 font-serif">Community</h3>
+              <ul className="space-y-2">
+                <li><a href="/ecosystem" className="text-white/70 hover:text-[#FFD700] transition">Ecosystem</a></li>
+                <li><a href="#" className="text-white/70 hover:text-[#FFD700] transition">Discord</a></li>
+                <li><a href="https://twitter.com/fx1_hubs" className="text-white/70 hover:text-[#FFD700] transition">Twitter</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold uppercase tracking-wider mb-3 text-[#FFD700]">Learn</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li>
-                  <Link href="/token-utilities" className="hover:text-[#FFD700] transition">
-                    Token Utilities
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#FFD700] transition">
-                    Docs
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#FFD700] transition">
-                    FAQ
-                  </a>
-                </li>
+              <h3 className="font-bold text-[#FFD700] uppercase tracking-wider mb-4 font-serif">Learn</h3>
+              <ul className="space-y-2">
+                <li><a href="/token-utilities" className="text-white/70 hover:text-[#FFD700] transition">Token Utilities</a></li>
+                <li><a href="#" className="text-white/70 hover:text-[#FFD700] transition">Docs</a></li>
+                <li><a href="#" className="text-white/70 hover:text-[#FFD700] transition">FAQ</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold uppercase tracking-wider mb-3 text-[#FFD700]">Chains</h3>
-              <ul className="space-y-2 text-sm text-white/70">
-                <li>
-                  <a href="https://base.org" className="hover:text-[#FFD700] transition">
-                    Base
-                  </a>
-                </li>
-                <li>
-                  <a href="https://zora.co" className="hover:text-[#FFD700] transition">
-                    Zora
-                  </a>
-                </li>
-                <li>
-                  <a href="https://farcaster.xyz" className="hover:text-[#FFD700] transition">
-                    Farcaster
-                  </a>
-                </li>
+              <h3 className="font-bold text-[#FFD700] uppercase tracking-wider mb-4 font-serif">Chains</h3>
+              <ul className="space-y-2">
+                <li><a href="https://base.org" className="text-white/70 hover:text-[#FFD700] transition">Base</a></li>
+                <li><a href="https://zora.co" className="text-white/70 hover:text-[#FFD700] transition">Zora</a></li>
+                <li><a href="https://farcaster.xyz" className="text-white/70 hover:text-[#FFD700] transition">Farcaster</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 pb-8">
-            <p className="text-white/60">
+          <div className="border-t border-[#FFD700]/10 pt-8 text-center">
+            <p className="text-white/60 mb-2">
               © {new Date().getFullYear()} FX1 DIGITAL HUBS — Powering the Future of Web3 Creation
             </p>
-            <p className="text-sm text-white/50 mt-2">
+            <p className="text-sm text-white/50">
               Digital Fashion • NFT Wearables • Creator Economy
             </p>
+            <p className="text-xs text-white/40 mt-4">
+              Built on Base • Zora • Farcaster
+            </p>
           </div>
-        </section>
-      </main>
+        </div>
+      </footer>
     </div>
   )
 }
+
+export default LuxuryLandingPage
