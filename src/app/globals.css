@@ -596,6 +596,68 @@
   .page-footer {
     @apply border-t border-white/10 px-6 py-6 text-center text-sm text-white/60;
   }
+
+  /* Smooth animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes glow-soft {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-glow-soft {
+    animation: glow-soft 3s ease-in-out infinite;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-3d {
+      min-height: auto;
+      padding: 3rem 0;
+    }
+
+    .hero-title-luxury {
+      font-size: 2rem;
+    }
+
+    .section-title-luxury {
+      font-size: 1.75rem;
+    }
+
+    .feature-card-luxury {
+      padding: 1.5rem;
+    }
+  }
 }
 
 @media (max-width: 991px) {
