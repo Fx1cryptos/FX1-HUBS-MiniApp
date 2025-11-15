@@ -326,11 +326,14 @@ const LuxuryLandingPage = () => {
             <p className="text-white/60 mb-2">
               © {new Date().getFullYear()} FX1 DIGITAL HUBS — Powering the Future of Web3 Creation
             </p>
-            <p className="text-sm text-white/50">
+            <p className="text-sm text-white/50 mb-4">
               Digital Fashion • NFT Wearables • Creator Economy
             </p>
-            <p className="text-xs text-white/40 mt-4">
-              Built on Base • Zora • Farcaster
+            <p className="text-xs text-white/40 mb-4">
+              Built on Base • Zora • Farcaster • <a href="https://flaunch.gg/base/group/0x50ec14dc217daae2f7f3fc4c86836e0f3a52dde4" className="text-[#FFD700] hover:text-white transition">Stake & Earn on Flaunch</a>
+            </p>
+            <p className="text-xs text-white/40">
+              Powered by Base & Zora
             </p>
           </div>
         </div>
