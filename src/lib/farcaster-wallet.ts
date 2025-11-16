@@ -58,9 +58,9 @@ export const connectBase = async (): Promise<WalletUser | null> => {
       throw new Error('No Ethereum provider found. Please install MetaMask.')
     }
 
-    const accounts = await window.ethereum.request({
+    const accounts = (await window.ethereum.request({
       method: 'eth_requestAccounts',
-    })
+    })) as string[]
 
     if (accounts && accounts.length > 0) {
       return {
