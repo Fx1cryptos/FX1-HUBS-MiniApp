@@ -88,9 +88,9 @@ export const checkWalletConnection = async (): Promise<WalletUser | null> => {
 
     // Try Base wallet
     if (window.ethereum) {
-      const accounts = await window.ethereum.request({
+      const accounts = (await window.ethereum.request({
         method: 'eth_accounts',
-      })
+      })) as string[]
 
       if (accounts && accounts.length > 0) {
         return {
