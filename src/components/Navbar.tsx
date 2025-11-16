@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import WalletConnectPanel from './WalletConnectPanel'
 
@@ -22,8 +23,15 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-6 py-3 md:py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity group">
-          <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFC700] flex items-center justify-center font-bold text-[#4169E1] text-lg md:text-xl transform group-hover:scale-110 transition-transform">
-            💎
+          <div className="h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform bg-gradient-to-br from-[#FFD700] to-[#FFC700]">
+            <Image
+              src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2Fb2e8c1d7a7fa45fda204a2f41c3adae6?format=webp&width=100"
+              alt="FX1 Digital Hubs Logo"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+              priority
+            />
           </div>
           <div className="hidden sm:block">
             <div className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#FFD700] font-serif">
