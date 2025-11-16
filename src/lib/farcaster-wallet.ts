@@ -1,6 +1,15 @@
 // Farcaster + Base Wallet Connection Service
 import { sdk } from '@farcaster/miniapp-sdk'
 
+declare global {
+  interface Window {
+    ethereum?: {
+      request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
+      on?: (event: string, callback: (...args: unknown[]) => void) => void
+    }
+  }
+}
+
 export interface WalletUser {
   farcasterUsername?: string
   baseAddress?: string
