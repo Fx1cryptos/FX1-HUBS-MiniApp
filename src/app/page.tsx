@@ -71,7 +71,7 @@ const LuxuryLandingPage = () => {
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-12">
             <Link href="/studio">
               <button className="btn-3d-primary px-8 py-4 text-lg md:text-xl whitespace-nowrap">
-                🚀 Launch Mini App
+                ���� Launch Mini App
               </button>
             </Link>
             <Link href="/mint">
@@ -136,7 +136,14 @@ const LuxuryLandingPage = () => {
 
             {/* Feature 2: Creator Community Hub */}
             <div className="feature-card-luxury group">
-              <div className="text-5xl md:text-6xl mb-6 flex items-center justify-center h-40">🌐</div>
+              <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                <Image
+                  src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2Fdc3a31423d97457793ab59cfb9f6474e?format=webp&width=800"
+                  alt="Creator Community Hub - FX1 Digital Hubs"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-[#FFD700] mb-4 font-serif">Creator Community Hub</h3>
               <p className="text-white/80 mb-6 leading-relaxed">
                 Build and connect using $FX1_HUBS utility token for governance, staking, and exclusive drops.
