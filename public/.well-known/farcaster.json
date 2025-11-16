@@ -1,0 +1,58 @@
+{
+  "name": "FX1 Digital Hubs",
+  "slug": "fx1-digital-hubs",
+  "description": "Your Web3 Digital Wardrobe & Creator Hub on Base. Create on-chain fashion, mint NFT wearables, and stake in our Flaunch group pool to earn $FDH rewards.",
+  "version": "1.2.0",
+  "baseBuilder": {
+    "ownerAddress": "0x5f188E67C374feF892Cc3BaC4aE0689166C6a620"
+  },
+  "tokens": {
+    "primaryUtility": {
+      "symbol": "fx1_hubs",
+      "type": "ZORA_CREATOR_COIN",
+      "contract": "0x24c42adfb620f3835fcb31fbdf3c1773fac76970"
+    },
+    "premiumReward": {
+      "symbol": "FDH",
+      "type": "ERC20",
+      "chain": "base",
+      "contract": "0x1f85705d939bb6fa1aebe99d7105adcee75ce380"
+    }
+  },
+  "permissions": ["identity", "storage", "network"],
+  "entry": "/_miniapp/frame.html",
+  "allowedOrigins": [
+    "https://fx1cryptos.github.io",
+    "https://*.vercel.app"
+  ],
+  "buttons": [
+    {
+      "label": "Launch Mini App",
+      "action": "link",
+      "target": "/"
+    },
+    {
+      "label": "Mint Onchain Fashion",
+      "action": "link",
+      "target": "/mint"
+    },
+    {
+      "label": "Stake & Earn $FDH",
+      "action": "link",
+      "target": "https://flaunch.gg/base/group/0x50ec14dc217daae2f7f3fc4c86836e0f3a52dde4"
+    },
+    {
+      "label": "Buy $FX1_HUBS",
+      "action": "link",
+      "target": "/token"
+    }
+  ],
+  "image": {
+    "aspectRatio": "1:1",
+    "url": "https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2Fb2e8c1d7a7fa45fda204a2f41c3adae6?format=webp&width=800"
+  },
+  "social": {
+    "twitter": "@fx1_hubs",
+    "farcaster": "@fx1_hubs"
+  }
+}

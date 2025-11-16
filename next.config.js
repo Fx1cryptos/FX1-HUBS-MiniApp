@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['ipfs.io', 'pinata.cloud', 'zora.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ipfs.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pinata.cloud',
+      },
+      {
+        protocol: 'https',
+        hostname: 'zora.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.builder.io',
+      },
+    ],
   },
   reactStrictMode: true,
 }

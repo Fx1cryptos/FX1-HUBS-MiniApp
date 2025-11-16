@@ -1,35 +1,93 @@
-"use client"
+'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+import { useState } from 'react'
+import WalletConnectPanel from './WalletConnectPanel'
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/collections', label: 'Collections' },
+  { href: '/studio', label: 'Studio' },
+  { href: '/mint', label: 'Mint' },
+  { href: '/wardrobe', label: 'Wardrobe' },
+  { href: '/leaderboard', label: 'Leaderboard' },
+  { href: '/token-utilities', label: 'Tokens' },
+  { href: '/connect', label: 'Connect' },
 ]
 
 export default function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-lg font-semibold uppercase tracking-widest">
-          FX1 Digital Hubs
+    <header className="sticky top-0 z-50 page-header">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-6 py-3 md:py-4">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity group">
+          <div className="h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform bg-gradient-to-br from-[#FFD700] to-[#FFC700]">
+            <Image
+              src="https://cdn.builder.io/api/v1/image/assets%2Fb2c384075df940e6b7b3fab0ca81a270%2Fb2e8c1d7a7fa45fda204a2f41c3adae6?format=webp&width=100"
+              alt="FX1 Digital Hubs Logo"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
+          <div className="hidden sm:block">
+            <div className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#FFD700] font-serif">
+              FX1 Digital Hubs
+            </div>
+            <div className="text-[10px] md:text-xs text-[#FFD700]/70 font-medium">On Base • Zora • Farcaster</div>
+          </div>
         </Link>
-        <nav>
-          <ul className="flex items-center gap-6 text-sm uppercase tracking-[0.3em]">
-            {navigationLinks.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="transition-colors hover:text-white/60"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-2">
+          {navigationLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="nav-link px-4 py-2 text-xs uppercase tracking-wider"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+
+        {/* Wallet Connect Panel */}
+        <div className="hidden lg:block">
+          <WalletConnectPanel />
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="lg:hidden p-2 text-[#FFD700] hover:bg-[#FFD700]/10 rounded-lg transition-colors"
+        >
+          <span className="text-2xl">☰</span>
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden border-t border-[#FFD700]/10 p-4 bg-gradient-to-b from-[#4169E1]/20 to-[#2E4C8F]/20">
+          <nav className="flex flex-col gap-2 mb-4">
+            {navigationLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="nav-link px-4 py-2 text-sm font-medium text-[#FFD700]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="border-t border-[#FFD700]/10 pt-4">
+            <WalletConnectPanel />
+          </div>
+        </div>
+      )}
     </header>
   )
 }
